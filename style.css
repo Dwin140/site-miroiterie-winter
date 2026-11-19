@@ -1,0 +1,161 @@
+/* Miroiterie Winter : feuille de style commune à toutes les pages.
+   Couleurs : bleu marine #16325f, orange #e8601c, fond crème #faf8f4 (voir CLAUDE.md). */
+:root{
+  --navy:#16325f; --orange:#e8601c; --orange-fonce:#c94f12; --bg:#faf8f4; --surface:#ffffff; --fg:#1d232c; --muted:#5b6472; --line:#e3ded5; --on-navy:#ffffff;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif; --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#11161f;--surface:#19202c;--fg:#eef1f5;--muted:#a3adbb;--line:#2a3342;--navy:#0d1f3d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#11161f;--surface:#19202c;--fg:#eef1f5;--muted:#a3adbb;--line:#2a3342;--navy:#0d1f3d;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+img{max-width:100%;height:auto}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
+h2{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800}
+p{margin:0}
+.eyebrow{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);font-size:.85rem}
+a{color:inherit}
+.sauter{position:absolute;left:-999px;top:0;background:var(--navy);color:#fff;padding:8px 12px;z-index:50}
+.sauter:focus{left:8px}
+.btn{display:inline-flex;align-items:center;gap:.5em;background:var(--orange);color:#fff;font-family:var(--display);font-weight:800;font-size:1.25rem;padding:.75em 1.2em;border-radius:10px;text-decoration:none}
+.btn:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+
+/* En-tête */
+header.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:8px 20px;padding-block:8px;flex-wrap:wrap}
+header.top .logo{display:block;line-height:0}
+header.top img{height:52px;width:auto}
+header.top nav{display:flex;gap:4px 18px;flex-wrap:wrap;order:3;width:100%;justify-content:center;border-top:1px solid var(--line);padding-top:6px}
+header.top nav a{color:#1d232c;text-decoration:none;font-weight:600;font-size:.95rem;padding:4px 2px}
+header.top nav a:hover{color:var(--orange)}
+header.top a.tel{display:inline-flex;align-items:center;gap:.4em;font-family:var(--display);font-weight:800;color:var(--navy);text-decoration:none;font-size:1.1rem}
+@media (min-width:760px){header.top nav{order:0;width:auto;border:0;padding:0}}
+
+/* Fil d'Ariane */
+.fil ol{list-style:none;display:flex;flex-wrap:wrap;gap:4px;margin:0;padding:12px 0;font-size:.85rem;color:var(--muted)}
+.fil li+li::before{content:"›";margin-right:4px}
+.fil a{text-decoration:none}
+.fil a:hover{text-decoration:underline}
+
+/* Bandeau bleu */
+.hero{background:var(--navy);color:var(--on-navy)}
+.hero .wrap{padding-block:44px 52px;display:grid;gap:20px}
+.hero h1{font-size:clamp(2rem,7vw,3.6rem);font-weight:800;text-transform:uppercase;max-width:18ch}
+.hero p.lead{font-size:1.12rem;max-width:60ch;opacity:.92}
+.hero .row{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center}
+.hero .num{font-family:var(--display);font-size:clamp(1.8rem,6vw,2.6rem);font-weight:800;letter-spacing:.02em;text-decoration:none;color:#fff}
+.facts{display:flex;flex-wrap:wrap;gap:8px 28px;font-weight:600;font-size:.95rem}
+.facts span{display:flex;gap:.4em;align-items:center}
+.facts b{color:var(--orange);font-family:var(--display)}
+
+section{padding-block:52px}
+section .wrap{display:grid;gap:28px}
+section.fond{background:var(--surface)}
+
+/* Services */
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.services>div{background:var(--surface);padding:20px;display:grid;gap:6px;align-content:start;text-decoration:none}
+.services h3{font-size:1.15rem;font-weight:700}
+.services p{color:var(--muted);font-size:.95rem}
+.services .plus{color:var(--orange);font-weight:600;font-size:.9rem;margin-top:4px}
+.services .urgent{background:var(--orange);color:#fff}
+.services .urgent p,.services .urgent .plus{color:#fff;opacity:.95}
+
+/* Avant / après */
+.proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;align-items:center}
+.proof img,.visuel img,.real img{width:100%;border-radius:12px;display:block}
+.proof .txt{display:grid;gap:14px;min-width:0}
+.galerie{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.real{margin:0;display:grid;gap:10px}
+.real figcaption{display:grid;gap:2px}
+.real figcaption span{color:var(--muted);font-size:.95rem}
+.lien-fort{color:var(--orange);font-weight:700;text-decoration:none}
+.lien-fort:hover{text-decoration:underline}
+
+/* Pages service et ville */
+.deux{display:grid;gap:28px}
+@media (min-width:760px){.deux{grid-template-columns:1fr 1fr}.deux.avec-image{grid-template-columns:1.3fr 1fr;align-items:start}}
+.blocs{display:grid;gap:24px}
+.bloc{display:grid;gap:10px;align-content:start}
+.bloc h2{font-size:clamp(1.3rem,3vw,1.6rem)}
+.bloc ul,.liste-atouts{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.bloc li::marker,.liste-atouts li::marker{color:var(--orange)}
+.bloc a{color:var(--navy);font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bloc a{color:#9fb8e6}}
+.visuel{margin:0}
+.liste-atouts{list-style:none;padding:0;gap:12px}
+.liste-atouts li{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--orange);border-radius:8px;padding:12px 14px}
+.villes{display:flex;flex-wrap:wrap;gap:10px}
+.villes a{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:8px 14px;text-decoration:none;font-weight:600;font-size:.95rem}
+.villes a:hover{border-color:var(--orange);color:var(--orange)}
+
+/* Avis */
+.reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.reviews figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:10px;align-content:start}
+.reviews blockquote{margin:0;font-size:.98rem}
+.reviews figcaption{color:var(--muted);font-size:.9rem;font-weight:600}
+.stars{color:var(--orange);letter-spacing:2px}
+.score{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.score strong{font-family:var(--display);font-size:2.6rem;font-weight:800}
+.zone{color:var(--muted);max-width:75ch}
+
+/* FAQ */
+.faq-liste{display:grid;gap:10px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:0 16px}
+.faq summary{cursor:pointer;font-weight:700;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--orange);font-size:1.3rem;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding-bottom:14px;color:var(--muted)}
+
+/* Contact */
+.contact{background:var(--orange);color:#fff}
+.contact .wrap{padding-block:44px;display:grid;gap:14px;justify-items:start}
+.contact .eyebrow{color:#fff}
+.contact .num{font-family:var(--display);font-size:clamp(2rem,8vw,3.2rem);font-weight:800;text-decoration:none}
+.contact .btn{background:var(--navy)}
+.contact a.mail{color:#fff;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.contact .astuce{opacity:.95;font-size:.95rem}
+
+/* Texte long (mentions légales) */
+.texte{max-width:75ch}
+.texte h1{font-size:clamp(1.8rem,5vw,2.4rem)}
+.texte h2{font-size:1.25rem;margin-top:12px}
+
+/* Pied de page */
+footer{padding-block:36px 96px;color:var(--muted);font-size:.92rem;border-top:1px solid var(--line)}
+footer .cols{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+footer .cols>div{display:grid;gap:10px;align-content:start}
+footer .ftitre{font-family:var(--display);font-weight:800;color:var(--fg);font-size:1rem}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--orange)}
+footer .reseaux{display:flex;gap:16px;flex-wrap:wrap}
+footer .reseaux a{display:inline-flex;align-items:center;gap:6px;color:var(--fg);font-weight:600}
+footer .lien-avis{color:var(--orange);font-weight:700}
+footer .legal{margin-top:24px;font-size:.85rem}
+
+/* Bouton d'appel fixe sur téléphone */
+.appel-fixe{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:30;display:flex;justify-content:center;align-items:center;gap:.5em;background:var(--orange);color:#fff;font-family:var(--display);font-weight:800;font-size:1.15rem;padding:14px;border-radius:12px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+@media (min-width:760px){.appel-fixe{display:none}footer{padding-bottom:36px}}
+
+@media (prefers-reduced-motion:no-preference){
+  .btn{transition:transform .15s}.btn:hover{transform:translateY(-2px)}
+  @keyframes monte{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @keyframes onde{0%{box-shadow:0 0 0 0 rgba(232,96,28,.55)}70%{box-shadow:0 0 0 16px rgba(232,96,28,0)}100%{box-shadow:0 0 0 0 rgba(232,96,28,0)}}
+  @keyframes brille{0%,100%{opacity:1}50%{opacity:.55}}
+  .hero .wrap>*{animation:monte .7s cubic-bezier(.2,.7,.2,1) both}
+  .hero .wrap>*:nth-child(2){animation-delay:.08s}
+  .hero .wrap>*:nth-child(3){animation-delay:.16s}
+  .hero .wrap>*:nth-child(4){animation-delay:.24s}
+  .hero .wrap>*:nth-child(5){animation-delay:.32s}
+  .hero .btn,.contact .btn{animation:onde 2.2s ease-out 1.2s infinite}
+  .services .urgent h3::before{content:"";display:inline-block;width:.55em;height:.55em;border-radius:50%;background:#fff;margin-right:.45em;vertical-align:.12em;animation:brille 1.4s ease-in-out infinite}
+  .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+  .js .reveal.vu{opacity:1;transform:none}
+  .services>div,.reviews figure{transition:transform .2s ease,box-shadow .2s ease}
+  .services>div:hover,.reviews figure:hover,html .services>div.vu:hover,html .reviews>figure.vu:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(22,50,95,.12);position:relative;z-index:1}
+}
+
+/* Les ancres du menu ne passent pas sous l en-tête fixe */
+[id]{scroll-margin-top:110px}
