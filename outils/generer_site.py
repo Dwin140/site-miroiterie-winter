@@ -174,6 +174,7 @@ def tete(titre, desc, chemin, ld=(), robots="index,follow", og_image="/images/av
 <title>{e(titre)}</title>
 <meta name="description" content="{e(desc)}">
 <meta name="robots" content="{robots}">
+<meta name="google-site-verification" content="3eZOdhtBjB0FbxQvSEV5quoKze304A2814nCYsD8Kec">
 <link rel="canonical" href="{url}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
