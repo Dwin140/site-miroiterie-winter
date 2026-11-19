@@ -250,10 +250,6 @@ def bloc_avis():
     return f'''<section id="avis"><div class="wrap">
   <div class="score"><strong>{NOTE}</strong><span class="stars" aria-label="5 étoiles">★★★★★</span><span>{NB_AVIS} avis sur Google</span></div>
   <div class="reviews">{fig}</div>
-  <div class="cta-reseaux">
-    <a class="btn-sec" href="{MAPS}" rel="noopener" target="_blank">{ICON_MAP} Voir nos avis sur Google Maps</a>
-    <a class="btn-sec" href="{INSTAGRAM}" rel="noopener" target="_blank">{ICON_IG} Nos chantiers sur Instagram</a>
-  </div>
   <p class="zone" id="zone"><b>Zone d'intervention :</b> {", ".join(ZONE)} et toute l'Île-de-France.</p>
 </div></section>'''
 

@@ -157,11 +157,5 @@ footer .legal{margin-top:24px;font-size:.85rem}
   .services>div:hover,.reviews figure:hover,html .services>div.vu:hover,html .reviews>figure.vu:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(22,50,95,.12);position:relative;z-index:1}
 }
 
-/* Boutons secondaires Google Maps / Instagram */
-.cta-reseaux{display:flex;flex-wrap:wrap;gap:12px}
-.btn-sec{display:inline-flex;align-items:center;gap:.5em;border:2px solid var(--navy);color:var(--navy);background:var(--surface);font-weight:700;padding:.65em 1em;border-radius:10px;text-decoration:none}
-.btn-sec:hover{background:var(--navy);color:#fff}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn-sec{border-color:#9fb8e6;color:#9fb8e6}}
-
 /* Les ancres du menu ne passent pas sous l en-tête fixe */
 [id]{scroll-margin-top:110px}
