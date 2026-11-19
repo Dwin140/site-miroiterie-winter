@@ -103,6 +103,17 @@ VILLES = [
        texte="Bagnolet est proche de Rosny-sous-Bois et des portes de Paris. Nous y remplaçons vitres, vitrines et doubles vitrages, et nous posons parois de douche et miroirs sur mesure."),
 ]
 
+SERVICES_ACCUEIL = [
+  ("Urgence vitre cassée","Mise en sécurité et remplacement de vitre, vitrine ou double vitrage, de jour comme de nuit.",True),
+  ("Miroirs sur mesure","Ronds, ovales ou rectangulaires, découpés à vos mesures et posés chez vous.",False),
+  ("Crédences en verre","Verre laqué pour la cuisine, facile à nettoyer, posé proprement.",False),
+  ("Parois de douche","Parois fixes ou coulissantes, pare-baignoire, sur mesure.",False),
+  ("Marquises et verrières","Remplacement des verres en gardant votre armature existante.",False),
+  ("Fenêtres et portes-fenêtres","Fourniture et pose, remplacement de double vitrage, portes Clarit.",False),
+  ("Volets roulants","Manuels, électriques ou solaires, fournis et posés.",False),
+  ("Serrurerie et réglages","Réglage et remplacement de crémones, portes, fenêtres et portes blindées qui ferment mal.",False),
+]
+
 REALISATIONS = [
   ("avant-apres-vitre-cassee","Vitre cassée remplacée","La vitre était fendue et tenue par du ruban adhésif. Verre neuf coupé aux mesures et posé dans le cadre d'origine."),
   ("avant-apres-baie-vitree","Baie vitrée 4 vantaux","Remplacement d'une ancienne baie par une baie PVC blanc neuve."),
@@ -185,7 +196,7 @@ def tete(titre, desc, chemin, ld=(), robots="index,follow", og_image="/images/av
 <a class="sauter" href="#contenu">Aller au contenu</a>
 <header class="top"><div class="wrap">
   <a href="/" class="logo"><img src="/images/logo-entete.png" alt="Miroiterie Winter, vitrier serrurier" width="271" height="177"></a>
-  <nav aria-label="Menu principal"><a href="/#services">Services</a><a href="/realisations/">Réalisations</a><a href="/#zone">Zone</a><a href="/#contact">Contact</a></nav>
+  <nav aria-label="Menu principal"><a href="/#services">Services</a><a href="/#avis">Avis</a><a href="/#zone">Zone</a><a href="/#faq">FAQ</a><a href="/#contact">Contact</a></nav>
   <a class="tel" href="{TEL_LIEN}">{ICON_TEL}<span>{TEL}</span></a>
 </div></header>
 <main id="contenu">
@@ -202,8 +213,6 @@ def contact():
 '''
 
 def pied():
-    serv = "".join(f'<li><a href="/{s["slug"]}/">{e(s["court"])}</a></li>' for s in SERVICES)
-    vil = "".join(f'<li><a href="/{v["slug"]}/">Vitrier {e(v["nom"])}</a></li>' for v in VILLES)
     return f'''</main>
 {contact()}
 <footer><div class="wrap">
@@ -211,8 +220,7 @@ def pied():
     <div><p class="ftitre">Miroiterie Winter</p><p>Vitrier, miroitier et serrurier à Rosny-sous-Bois (93), intervention 24h/24 dans toute l'Île-de-France.</p>
       <p class="reseaux"><a href="{INSTAGRAM}" rel="noopener" target="_blank" aria-label="Instagram Miroiterie Winter">{ICON_IG}<span>Instagram</span></a><a href="{MAPS}" rel="noopener" target="_blank" aria-label="Miroiterie Winter sur Google Maps">{ICON_MAP}<span>Google Maps</span></a></p>
       <p><a class="lien-avis" href="{AVIS}" rel="noopener" target="_blank">★ Laisser un avis Google</a></p></div>
-    <div><p class="ftitre">Services</p><ul>{serv}<li><a href="/realisations/">Réalisations avant / après</a></li></ul></div>
-    <div><p class="ftitre">Villes</p><ul><li><a href="/">Vitrier Rosny-sous-Bois</a></li>{vil}</ul></div>
+    <div><p class="ftitre">Sur cette page</p><ul><li><a href="/#services">Nos services</a></li><li><a href="/#avis">Avis clients</a></li><li><a href="/#zone">Zone d'intervention</a></li><li><a href="/#faq">Questions fréquentes</a></li><li><a href="/#contact">Contact et devis</a></li></ul></div>
   </div>
   <p class="legal">© 2026 Miroiterie Winter · Dwinter Morisseau, entrepreneur individuel · <a href="/mentions-legales/">Mentions légales</a></p>
 </div></footer>
@@ -228,21 +236,25 @@ def fil(items):
 
 def bloc_faq(faq, titre="Questions fréquentes"):
     q = "".join(f'<details><summary>{e(a)}</summary><p>{e(b)}</p></details>' for a,b in faq)
-    return f'<section class="faq"><div class="wrap"><div><p class="eyebrow">FAQ</p><h2>{e(titre)}</h2></div><div class="faq-liste">{q}</div></div></section>'
+    return f'<section class="faq" id="faq"><div class="wrap"><div><p class="eyebrow">FAQ</p><h2>{e(titre)}</h2></div><div class="faq-liste">{q}</div></div></section>'
 
-def cartes_services(titre_h="h3"):
+def cartes_services():
     out = []
-    for s in SERVICES:
-        cls = ' class="urgent"' if s.get("urgent") else ""
-        out.append(f'<a{cls} href="/{s["slug"]}/"><{titre_h}>{e(s["court"])}</{titre_h}><p>{e(s["carte"])}</p><span class="plus">En savoir plus →</span></a>')
+    for t, d, urgent in SERVICES_ACCUEIL:
+        cls = ' class="urgent"' if urgent else ""
+        out.append(f'<div{cls}><h3>{e(t)}</h3><p>{e(d)}</p></div>')
     return '<div class="services">' + "".join(out) + '</div>'
 
 def bloc_avis():
     fig = "".join(f'<figure><blockquote>« {e(t)} »</blockquote><figcaption>{e(n)}</figcaption></figure>' for t,n in AVIS_CLIENTS)
-    return f'''<section><div class="wrap">
+    return f'''<section id="avis"><div class="wrap">
   <div class="score"><strong>{NOTE}</strong><span class="stars" aria-label="5 étoiles">★★★★★</span><span>{NB_AVIS} avis sur Google</span></div>
   <div class="reviews">{fig}</div>
-  <p><a class="lien-fort" href="{MAPS}" rel="noopener" target="_blank">Voir tous les avis sur Google →</a></p>
+  <div class="cta-reseaux">
+    <a class="btn-sec" href="{MAPS}" rel="noopener" target="_blank">{ICON_MAP} Voir nos avis sur Google Maps</a>
+    <a class="btn-sec" href="{INSTAGRAM}" rel="noopener" target="_blank">{ICON_IG} Nos chantiers sur Instagram</a>
+  </div>
+  <p class="zone" id="zone"><b>Zone d'intervention :</b> {", ".join(ZONE)} et toute l'Île-de-France.</p>
 </div></section>'''
 
 def hero(eyebrow, h1, lead, facts=True):
@@ -284,7 +296,6 @@ def page_accueil():
       <p class="eyebrow">Avant / après</p>
       <h2>Une vitre cassée remplacée</h2>
       <p>La vitre était fendue et tenue par du ruban adhésif. Nous avons coupé un verre neuf aux mesures et l'avons posé dans la fenêtre d'origine, sans toucher au cadre. Le chantier est laissé propre après notre passage.</p>
-      <p><a class="lien-fort" href="/realisations/">Voir toutes nos réalisations →</a></p>
     </div>
   </div>
 </div></section>
@@ -299,11 +310,6 @@ def page_accueil():
   </ul>
 </div></section>
 {bloc_avis()}
-<section class="fond" id="zone"><div class="wrap">
-  <div><p class="eyebrow">Zone d'intervention</p><h2>Vitrier dans l'est parisien et toute l'Île-de-France</h2></div>
-  <p class="zone">Depuis Rosny-sous-Bois, nous intervenons dans toute l'Île-de-France, en particulier : {", ".join(ZONE[1:])}.</p>
-  <div class="villes">{"".join(f'<a href="/{v["slug"]}/">Vitrier {e(v["nom"])}</a>' for v in VILLES)}</div>
-</div></section>
 {bloc_faq(FAQ_ACCUEIL)}
 '''
     h += pied()
@@ -401,9 +407,6 @@ def page_404():
     open(os.path.join(OUT, "404.html"), "w", encoding="utf-8").write(h.replace(" ?", "\u00a0?"))
 
 page_accueil()
-for s in SERVICES: page_service(s)
-for v in VILLES: page_ville(v)
-page_realisations()
 page_mentions()
 page_404()
 

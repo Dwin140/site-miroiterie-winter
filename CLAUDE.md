@@ -37,10 +37,10 @@ Il n'est pas développeur : réponses courtes, simples, sans jargon. Toujours fi
 - Style d'écriture : phrases courtes, concrètes, vouvoiement, pas de superlatifs creux.
 
 ## Technique
-- Site statique multi-pages, sans framework. Toutes les pages HTML (accueil, 6 pages services, 7 pages villes, réalisations, mentions légales, 404), `sitemap.xml` et `robots.txt` sont GÉNÉRÉES par `outils/generer_site.py` (textes, FAQ, villes, avis, liens réseaux sont dans ce script).
+- Site statique sans framework. Une page d'accueil unique (choix de Dwinter le 19/11/2026 : pas de pages services, villes ni réalisations) + mentions légales + 404. Ces pages HTML, `sitemap.xml` et `robots.txt` sont GÉNÉRÉES par `outils/generer_site.py` (textes, 8 services, FAQ, avis, zone, liens réseaux sont dans ce script ; les listes SERVICES et VILLES et leurs fonctions de page ne sont plus utilisées, gardées si on rouvre des pages plus tard).
 - Pour modifier un texte, une ville, un service, les avis ou la note : changer `outils/generer_site.py`, puis lancer `python3 outils/generer_site.py .` à la racine. Ne pas modifier les .html à la main (ils seraient écrasés).
 - Style commun : `style.css`. Animations : `site.js`. Images : `images/` (JPG/WebP < 300 Ko, texte `alt` en français).
 - Domaine officiel : https://miroiterie-winter.fr (balises canonical, sitemap, données structurées). Réseaux : Instagram https://www.instagram.com/miroiterie_winter/ et fiche Google Maps.
-- Référencement local : une page par service et par ville, titres « Vitrier à <ville> (<code postal>) », données schema.org (entreprise, FAQ, fil d'Ariane), note Google à jour.
+- Référencement local : titre et description optimisés, données schema.org (entreprise, FAQ), sitemap, note Google à jour. Ordre de la page : bandeau, 8 services, avant/après, « Pourquoi nous appeler », note + avis + boutons Google Maps et Instagram + zone, FAQ, contact.
 - Le site miroiteriewinter.fr (sans tiret, fait par Local.fr) n'est PAS le nôtre : ne jamais le copier mot pour mot.
 - Vérifier chaque page sur téléphone (390 px) et ordinateur avant de proposer.
