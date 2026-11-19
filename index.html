@@ -64,6 +64,26 @@ section .wrap{display:grid;gap:28px}
 .contact .btn{background:var(--navy)}
 footer{padding-block:24px;color:var(--muted);font-size:.85rem}
 @media (prefers-reduced-motion:no-preference){.btn{transition:transform .15s}.btn:hover{transform:translateY(-2px)}}
+
+/* Animations (désactivées si l'utilisateur préfère moins de mouvement) */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes monte{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @keyframes onde{0%{box-shadow:0 0 0 0 rgba(232,96,28,.55)}70%{box-shadow:0 0 0 16px rgba(232,96,28,0)}100%{box-shadow:0 0 0 0 rgba(232,96,28,0)}}
+  @keyframes brille{0%,100%{opacity:1}50%{opacity:.55}}
+  .hero .wrap>*{animation:monte .7s cubic-bezier(.2,.7,.2,1) both}
+  .hero .wrap>*:nth-child(2){animation-delay:.08s}
+  .hero .wrap>*:nth-child(3){animation-delay:.16s}
+  .hero .wrap>*:nth-child(4){animation-delay:.24s}
+  .hero .wrap>*:nth-child(5){animation-delay:.32s}
+  .hero .btn,.contact .btn{animation:onde 2.2s ease-out 1.2s infinite}
+  .hero .row{animation:monte .7s cubic-bezier(.2,.7,.2,1) .24s both}
+  .services .urgent h3::before{content:"";display:inline-block;width:.55em;height:.55em;border-radius:50%;background:#fff;margin-right:.45em;vertical-align:.12em;animation:brille 1.4s ease-in-out infinite}
+  .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+  .js .reveal.vu{opacity:1;transform:none}
+  .services div,.reviews figure{transition:transform .2s ease,box-shadow .2s ease}
+  .services div:hover,.reviews figure:hover,html .services>div.vu:hover,html .reviews>figure.vu:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(22,50,95,.12);position:relative;z-index:1}
+}
+.contact a.mail{color:#fff;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 </style>
 </head>
 <body>
@@ -127,11 +147,21 @@ footer{padding-block:24px;color:var(--muted);font-size:.85rem}
 <div class="contact"><div class="wrap">
   <p class="eyebrow" style="color:#fff">Devis immédiat · 24h/24</p>
   <a class="num" href="tel:+33783386824">07 83 38 68 24</a>
-  <p>miroiterie.winter@gmail.com · 141 rue du Général Leclerc, 93110 Rosny-sous-Bois</p>
+  <p><a class="mail" href="mailto:miroiterie.winter@gmail.com?subject=Demande%20de%20devis">miroiterie.winter@gmail.com</a> · 141 rue du Général Leclerc, 93110 Rosny-sous-Bois</p>
   <a class="btn" href="tel:+33783386824">Appeler Miroiterie Winter</a>
 </div></div>
 
 <footer><div class="wrap">© 2026 Miroiterie Winter · Dwinter Morisseau, entrepreneur individuel · Rosny-sous-Bois</div></footer>
 
+<script>
+(function(){
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  document.documentElement.classList.add('js');
+  var els=document.querySelectorAll('section .wrap>*, .services>div, .reviews>figure, .contact .wrap>*');
+  els.forEach(function(el,i){el.classList.add('reveal');var p=el.parentElement;var k=Array.prototype.indexOf.call(p.children,el);el.style.transitionDelay=(Math.min(k,7)*70)+'ms';});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var t=e.target;t.classList.add('vu');io.unobserve(t);setTimeout(function(){t.style.transitionDelay='';},1200);}});},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(el){io.observe(el);});
+})();
+</script>
 </body>
 </html>
