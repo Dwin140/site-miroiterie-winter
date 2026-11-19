@@ -1,6 +1,6 @@
 # Site de la Miroiterie Winter
 
-Site vitrine d'une page pour la Miroiterie Winter, vitrier, miroitier et serrurier à Rosny-sous-Bois (93), qui intervient dans toute l'Île-de-France.
+Site vitrine pour la Miroiterie Winter, vitrier, miroitier et serrurier à Rosny-sous-Bois (93), qui intervient dans toute l'Île-de-France.
 Le site est publié automatiquement par Netlify à chaque mise à jour de la branche `main`.
 
 ## Qui demande les changements
@@ -30,13 +30,17 @@ Il n'est pas développeur : réponses courtes, simples, sans jargon. Toujours fi
 ## Design system
 - Couleurs : bleu marine `#16325f` (bandeau, titres), orange `#e8601c` (boutons d'appel, petites étiquettes, étoiles, bloc urgence), fond crème `#faf8f4`, blanc `#ffffff` pour les cartes, texte `#1d232c`, texte secondaire `#5b6472`, traits `#e3ded5`. Mode sombre déjà prévu dans les variables CSS de `index.html`.
 - Polices : Archivo (titres, gras 700-800, souvent en MAJUSCULES) et Public Sans (texte). Sur les flyers imprimés, l'équivalent est Anton + Barlow.
-- Logo : `logo.png` (trois fenêtres avec triangles orange, « MIROITERIE WINTER / VITRIER SERRURIER »).
+- Logo : `images/logo-entete.png` (en-tête), `images/icone-512.png` et favicons (trois fenêtres avec triangles orange, « MIROITERIE WINTER / VITRIER SERRURIER »).
 - Structure de la page : en-tête blanc (logo + téléphone) → bandeau bleu (accroche « Vitre cassée ? On intervient 24h/24. », bouton orange « Appeler maintenant », chiffres clés) → grille des services (la case « Urgence vitre cassée » en orange) → avant / après → avis Google + zone d'intervention → bandeau orange de contact → pied de page.
 - Le numéro de téléphone doit toujours être visible et cliquable : le but n°1 du site est de faire appeler.
 - Visuels avant / après : format 1080 x 1350, logo en haut, bande bleue « AVANT / APRÈS », photo avant à gauche (bordure bleue), photo après à droite (bordure orange), légende, pied orange avec le téléphone.
 - Style d'écriture : phrases courtes, concrètes, vouvoiement, pas de superlatifs creux.
 
 ## Technique
-- Une seule page : `index.html`, CSS dans la page, pas de framework, pas de build.
-- Mettre les nouvelles photos dans `images/` en JPG ou WebP de moins de 300 Ko, avec un texte `alt` en français.
-- Garder une bonne note mobile (PageSpeed) et le référencement local : titre, description, mots « vitrier Rosny-sous-Bois », zone desservie.
+- Site statique multi-pages, sans framework. Toutes les pages HTML (accueil, 6 pages services, 7 pages villes, réalisations, mentions légales, 404), `sitemap.xml` et `robots.txt` sont GÉNÉRÉES par `outils/generer_site.py` (textes, FAQ, villes, avis, liens réseaux sont dans ce script).
+- Pour modifier un texte, une ville, un service, les avis ou la note : changer `outils/generer_site.py`, puis lancer `python3 outils/generer_site.py .` à la racine. Ne pas modifier les .html à la main (ils seraient écrasés).
+- Style commun : `style.css`. Animations : `site.js`. Images : `images/` (JPG/WebP < 300 Ko, texte `alt` en français).
+- Domaine officiel : https://miroiterie-winter.fr (balises canonical, sitemap, données structurées). Réseaux : Instagram https://www.instagram.com/miroiterie_winter/ et fiche Google Maps.
+- Référencement local : une page par service et par ville, titres « Vitrier à <ville> (<code postal>) », données schema.org (entreprise, FAQ, fil d'Ariane), note Google à jour.
+- Le site miroiteriewinter.fr (sans tiret, fait par Local.fr) n'est PAS le nôtre : ne jamais le copier mot pour mot.
+- Vérifier chaque page sur téléphone (390 px) et ordinateur avant de proposer.
