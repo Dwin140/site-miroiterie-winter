@@ -14,7 +14,7 @@ NOTE, NB_AVIS = "4,9", 57
 INSTAGRAM = "https://www.instagram.com/miroiterie_winter/"
 MAPS = "https://maps.google.com/maps?cid=10857902701694603854"
 AVIS = "https://search.google.com/local/writereview?placeid=ChIJ51-lGxwT5kcRTtJCxPoEr5Y"
-DATE = "2026-11-19"
+DATE = "2026-11-22"
 
 e = html.escape
 
@@ -88,11 +88,11 @@ SERVICES = [
 
 VILLES = [
   dict(slug="vitrier-montreuil", nom="Montreuil", cp="93100", voisines=["Bagnolet","Fontenay-sous-Bois","Romainville","Rosny-sous-Bois"],
-       texte="Montreuil est juste à côté de Rosny-sous-Bois. Entre ses immeubles, ses maisons de ville et ses anciens ateliers, on y trouve beaucoup de verrières et de grandes surfaces vitrées : nous en remplaçons régulièrement les verres."),
+       texte="Montreuil est juste à côté de Rosny-sous-Bois. Entre ses immeubles, ses maisons de ville et ses anciens ateliers, on y trouve beaucoup de verrières et de grandes surfaces vitrées : nous remplaçons les verres en gardant la structure."),
   dict(slug="vitrier-noisy-le-sec", nom="Noisy-le-Sec", cp="93130", voisines=["Bondy","Romainville","Rosny-sous-Bois"],
        texte="Noisy-le-Sec est limitrophe de Rosny-sous-Bois. Pour une vitre cassée, une fenêtre qui ferme mal ou un miroir sur mesure, nous sommes à quelques minutes."),
   dict(slug="vitrier-villemomble", nom="Villemomble", cp="93250", voisines=["Le Raincy","Gagny","Rosny-sous-Bois"],
-       texte="Villemomble touche Rosny-sous-Bois. Maisons individuelles et pavillons y sont nombreux : fenêtres, volets roulants, portes-fenêtres et verrières font partie de nos interventions courantes."),
+       texte="Villemomble touche Rosny-sous-Bois. Maisons individuelles et pavillons y sont nombreux : nous y posons fenêtres, volets roulants et portes-fenêtres, et remplaçons les verres de verrières et marquises."),
   dict(slug="vitrier-bondy", nom="Bondy", cp="93140", voisines=["Noisy-le-Sec","Les Pavillons-sous-Bois","Rosny-sous-Bois"],
        texte="Bondy est à quelques minutes de notre base de Rosny-sous-Bois. Particuliers, commerces et bailleurs nous appellent pour sécuriser une vitre cassée ou remplacer un vitrage."),
   dict(slug="vitrier-fontenay-sous-bois", nom="Fontenay-sous-Bois", cp="94120", voisines=["Vincennes","Montreuil","Rosny-sous-Bois"],
@@ -113,6 +113,9 @@ SERVICES_ACCUEIL = [
   ("Volets roulants","Manuels, électriques ou solaires, fournis et posés.",False),
   ("Serrurerie et réglages","Réglage et remplacement de crémones, portes, fenêtres et portes blindées qui ferment mal.",False),
 ]
+
+# Pages villes en ligne (choix de Dwinter le 22/11/2026 : 4 villes proches)
+VILLES_ACTIVES = ["vitrier-montreuil","vitrier-noisy-le-sec","vitrier-villemomble","vitrier-fontenay-sous-bois"]
 
 REALISATIONS = [
   ("avant-apres-vitre-cassee","Vitre cassée remplacée","La vitre était fendue et tenue par du ruban adhésif. Verre neuf coupé aux mesures et posé dans le cadre d'origine."),
@@ -222,6 +225,7 @@ def pied():
       <p class="reseaux"><a href="{INSTAGRAM}" rel="noopener" target="_blank" aria-label="Instagram Miroiterie Winter">{ICON_IG}<span>Instagram</span></a><a href="{MAPS}" rel="noopener" target="_blank" aria-label="Miroiterie Winter sur Google Maps">{ICON_MAP}<span>Google Maps</span></a></p>
       <p><a class="lien-avis" href="{AVIS}" rel="noopener" target="_blank">★ Laisser un avis Google</a></p></div>
     <div><p class="ftitre">Sur cette page</p><ul><li><a href="/#services">Nos services</a></li><li><a href="/#avis">Avis clients</a></li><li><a href="/#zone">Zone d'intervention</a></li><li><a href="/#faq">Questions fréquentes</a></li><li><a href="/#contact">Contact et devis</a></li></ul></div>
+    <div><p class="ftitre">Villes</p><ul><li><a href="/">Vitrier Rosny-sous-Bois</a></li>{"".join(f'<li><a href="/{v["slug"]}/">Vitrier {e(v["nom"])}</a></li>' for v in VILLES if v["slug"] in VILLES_ACTIVES)}</ul></div>
   </div>
   <p class="legal">© 2026 Miroiterie Winter · Dwinter Morisseau, entrepreneur individuel · <a href="/mentions-legales/">Mentions légales</a></p>
 </div></footer>
@@ -246,12 +250,16 @@ def cartes_services():
         out.append(f'<div{cls}><h3>{e(t)}</h3><p>{e(d)}</p></div>')
     return '<div class="services">' + "".join(out) + '</div>'
 
+def zone_liens():
+    liens = {v["nom"]: v["slug"] for v in VILLES if v["slug"] in VILLES_ACTIVES}
+    return ", ".join(f'<a href="/{liens[z]}/">{e(z)}</a>' if z in liens else e(z) for z in ZONE)
+
 def bloc_avis():
     fig = "".join(f'<figure><blockquote>« {e(t)} »</blockquote><figcaption>{e(n)}</figcaption></figure>' for t,n in AVIS_CLIENTS)
     return f'''<section id="avis"><div class="wrap">
   <div class="score"><strong>{NOTE}</strong><span class="stars" aria-label="5 étoiles">★★★★★</span><span>{NB_AVIS} avis sur Google</span></div>
   <div class="reviews">{fig}</div>
-  <p class="zone" id="zone"><b>Zone d'intervention :</b> {", ".join(ZONE)} et toute l'Île-de-France.</p>
+  <p class="zone" id="zone"><b>Zone d'intervention :</b> {zone_liens()} et toute l'Île-de-France.</p>
 </div></section>'''
 
 def hero(eyebrow, h1, lead, facts=True):
@@ -348,17 +356,18 @@ def page_ville(v):
   <div class="deux"><div class="bloc"><h2>Votre vitrier de proximité à {e(n)}</h2><p>{e(v["texte"])}</p>
   <p>Nous intervenons aussi dans les villes voisines : {e(", ".join(v["voisines"]))}.</p></div>
   <div class="bloc"><h2>Nos interventions à {e(n)}</h2><ul>
-    <li><a href="/vitrier-urgence-vitre-cassee/">Urgence vitre cassée 24h/24</a> et mise en sécurité</li>
-    <li><a href="/fenetres-double-vitrage-volets/">Remplacement de double vitrage, fenêtres et volets roulants</a></li>
-    <li><a href="/miroir-sur-mesure/">Miroirs sur mesure et crédences en verre</a></li>
-    <li><a href="/paroi-de-douche-sur-mesure/">Parois de douche et pare-baignoire</a></li>
-    <li><a href="/verriere-marquise-vitrage/">Verres de verrière et de marquise</a></li>
-    <li><a href="/serrurerie-reglage-cremone/">Réglage de fenêtres et remplacement de crémones</a></li>
-  </ul></div></div>
+    <li>Urgence vitre cassée 24h/24 et mise en sécurité</li>
+    <li>Remplacement de vitre, de vitrine et de double vitrage</li>
+    <li>Miroirs sur mesure et crédences en verre</li>
+    <li>Parois de douche et pare-baignoire</li>
+    <li>Verres de verrière et de marquise</li>
+    <li>Fenêtres, portes-fenêtres et volets roulants</li>
+    <li>Réglage de fenêtres et remplacement de crémones</li>
+  </ul><p><a href="/#services">Voir le détail de nos services →</a></p></div></div>
 </div></section>
 {bloc_avis()}
 {bloc_faq(faq, f"Vitrier à {n} : vos questions")}
-<section class="fond"><div class="wrap"><div><p class="eyebrow">Autres villes</p><h2>Nous intervenons aussi à</h2></div><div class="villes"><a href="/">Vitrier Rosny-sous-Bois</a>{"".join(f'<a href="/{o["slug"]}/">Vitrier {e(o["nom"])}</a>' for o in VILLES if o is not v)}</div></div></section>
+<section class="fond"><div class="wrap"><div><p class="eyebrow">Autres villes</p><h2>Nous intervenons aussi à</h2></div><div class="villes"><a href="/">Vitrier Rosny-sous-Bois</a>{"".join(f'<a href="/{o["slug"]}/">Vitrier {e(o["nom"])}</a>' for o in VILLES if o is not v and o["slug"] in VILLES_ACTIVES)}</div></div></section>
 '''
     h += pied()
     ecrire(chemin, h); PAGES.append((chemin, "0.8"))
@@ -404,6 +413,8 @@ def page_404():
     open(os.path.join(OUT, "404.html"), "w", encoding="utf-8").write(h.replace(" ?", "\u00a0?"))
 
 page_accueil()
+for v in VILLES:
+    if v["slug"] in VILLES_ACTIVES: page_ville(v)
 page_mentions()
 page_404()
 
