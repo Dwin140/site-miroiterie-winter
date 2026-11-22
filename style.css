@@ -93,7 +93,9 @@ section.fond{background:var(--surface)}
 .reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
 .reviews figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:10px;align-content:start}
 .reviews blockquote{margin:0;font-size:.98rem}
-.reviews figcaption{color:var(--muted);font-size:.9rem;font-weight:600}
+.reviews figcaption{color:var(--muted);font-size:.9rem;font-weight:600;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+.reviews figcaption .qui{white-space:nowrap}
+@media (min-width:760px){.reviews{grid-template-columns:repeat(2,1fr)}}
 .stars{color:var(--orange);letter-spacing:2px}
 .score{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
 .score strong{font-family:var(--display);font-size:2.6rem;font-weight:800}
