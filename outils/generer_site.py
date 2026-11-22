@@ -10,7 +10,7 @@ TEL = "07 83 38 68 24"
 TEL_LIEN = "tel:+33783386824"
 MAIL = "miroiterie.winter@gmail.com"
 ADRESSE = "141 rue du Général Leclerc, 93110 Rosny-sous-Bois"
-NOTE, NB_AVIS = "4,9", 57
+NOTE, NB_AVIS = "4,9", 60
 INSTAGRAM = "https://www.instagram.com/miroiterie_winter/"
 MAPS = "https://maps.google.com/maps?cid=10857902701694603854"
 AVIS = "https://search.google.com/local/writereview?placeid=ChIJ51-lGxwT5kcRTtJCxPoEr5Y"
@@ -125,10 +125,11 @@ REALISATIONS = [
   ("avant-apres-miroir-ovale","Miroir ovale rénové","Miroir neuf façonné en ovale et remis dans son cadre d'origine."),
 ]
 
-AVIS_CLIENTS = [
-  ("Il a remplacé ma porte-fenêtre avec un travail très propre, soigné et de grande qualité. Ponctuel, professionnel, il laisse le chantier impeccable.","Nawel"),
-  ("Dépannage d'urgence sur une porte-fenêtre bloquée en position ouverte : il est venu de nuit ! Hyper réactif et très professionnel.","Sarah"),
-  ("Rien ne vaut le travail de M. Morisseau qui a géré à la perfection les miroirs de ma salle de bain et la vitre de baignoire.","Ludivine"),
+AVIS_CLIENTS = [  # (texte, prénom, mois) : avis Google 5 étoiles, prénom seulement
+  ("Pose de deux portes-fenêtres et de volets solaires. Merci pour votre travail.","Jose","novembre 2026"),
+  ("Remplacement de 4 doubles vitrages. Merci pour votre intervention.","Ti Goût Lakay","novembre 2026"),
+  ("L'installation de ma fenêtre s'est très bien passée. Intervention rapide, efficace et soignée, avec un vrai professionnalisme. Le résultat est nickel !","Melinda","novembre 2026"),
+  ("Dépannage d'urgence sur une porte-fenêtre bloquée en position ouverte : il est venu de nuit ! Hyper réactif et très professionnel.","Sarah","octobre 2026"),
 ]
 
 FAQ_ACCUEIL = [
@@ -255,7 +256,7 @@ def zone_liens():
     return ", ".join(f'<a href="/{liens[z]}/">{e(z)}</a>' if z in liens else e(z) for z in ZONE)
 
 def bloc_avis():
-    fig = "".join(f'<figure><blockquote>« {e(t)} »</blockquote><figcaption>{e(n)}</figcaption></figure>' for t,n in AVIS_CLIENTS)
+    fig = "".join(f'<figure><blockquote>«\u00a0{e(t)}\u00a0»</blockquote><figcaption><span class="stars" aria-label="5 étoiles">★★★★★</span> <span class="qui">{e(n)} · {m}</span></figcaption></figure>' for t,n,m in AVIS_CLIENTS)
     return f'''<section id="avis"><div class="wrap">
   <div class="score"><strong>{NOTE}</strong><span class="stars" aria-label="5 étoiles">★★★★★</span><span>{NB_AVIS} avis sur Google</span></div>
   <div class="reviews">{fig}</div>
