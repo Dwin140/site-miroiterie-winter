@@ -122,7 +122,7 @@ REALISATIONS = [
   ("avant-apres-baie-vitree","Baie vitrée 4 vantaux","Remplacement d'une ancienne baie par une baie PVC blanc neuve."),
   ("avant-apres-porte-fenetre","Porte-fenêtre","Pose d'une porte-fenêtre PVC blanc neuve, finitions propres."),
   ("avant-apres-fenetre-pvc","Fenêtre 2 vantaux","Fenêtre remplacée par une fenêtre PVC blanc double vitrage."),
-  ("avant-apres-miroir-ovale","Miroir ovale sur mesure","Miroir ovale façonné, fourni et posé dans une salle de bain."),
+  ("avant-apres-miroir-ovale","Miroir ovale rénové","Miroir neuf façonné en ovale et remis dans son cadre d'origine."),
 ]
 
 AVIS_CLIENTS = [
@@ -224,7 +224,7 @@ def pied():
     <div><p class="ftitre">Miroiterie Winter</p><p>Vitrier, miroitier et serrurier à Rosny-sous-Bois (93), intervention 24h/24 dans toute l'Île-de-France.</p>
       <p class="reseaux"><a href="{INSTAGRAM}" rel="noopener" target="_blank" aria-label="Instagram Miroiterie Winter">{ICON_IG}<span>Instagram</span></a><a href="{MAPS}" rel="noopener" target="_blank" aria-label="Miroiterie Winter sur Google Maps">{ICON_MAP}<span>Google Maps</span></a></p>
       <p><a class="lien-avis" href="{AVIS}" rel="noopener" target="_blank">★ Laisser un avis Google</a></p></div>
-    <div><p class="ftitre">Sur cette page</p><ul><li><a href="/#services">Nos services</a></li><li><a href="/#avis">Avis clients</a></li><li><a href="/#zone">Zone d'intervention</a></li><li><a href="/#faq">Questions fréquentes</a></li><li><a href="/#contact">Contact et devis</a></li></ul></div>
+    <div><p class="ftitre">Sur cette page</p><ul><li><a href="/#services">Nos services</a></li><li><a href="/#realisations">Nos réalisations</a></li><li><a href="/#avis">Avis clients</a></li><li><a href="/#zone">Zone d'intervention</a></li><li><a href="/#faq">Questions fréquentes</a></li><li><a href="/#contact">Contact et devis</a></li></ul></div>
     <div><p class="ftitre">Villes</p><ul><li><a href="/">Vitrier Rosny-sous-Bois</a></li>{"".join(f'<li><a href="/{v["slug"]}/">Vitrier {e(v["nom"])}</a></li>' for v in VILLES if v["slug"] in VILLES_ACTIVES)}</ul></div>
   </div>
   <p class="legal">© 2026 Miroiterie Winter · Dwinter Morisseau, entrepreneur individuel · <a href="/mentions-legales/">Mentions légales</a></p>
@@ -285,6 +285,11 @@ def ecrire(chemin, contenu):
 PAGES = []
 
 # ---------------------------------------------------------------- accueil
+def carrousel():
+    slides = "".join(f'<figure class="slide">{img(f, "Avant / après : " + t, lazy=(i>0))}<figcaption><b>{e(t)}</b><span>{e(d)}</span></figcaption></figure>' for i,(f,t,d) in enumerate(REALISATIONS))
+    points = "".join(f'<button type="button" aria-label="Voir la réalisation {i+1}"{" aria-current=\"true\"" if i==0 else ""}></button>' for i in range(len(REALISATIONS)))
+    return f'<div class="carrousel" aria-roledescription="carrousel" aria-label="Réalisations avant / après"><div class="piste" tabindex="0">{slides}</div><div class="points">{points}</div></div>'
+
 def page_accueil():
     ld = [ENTREPRISE, faq_ld(FAQ_ACCUEIL), {"@context":"https://schema.org","@type":"WebSite","name":"Miroiterie Winter","url":DOMAINE+"/"}]
     h = tete("Vitrier à Rosny-sous-Bois 24h/24 | Miroiterie Winter", "Miroiterie Winter, vitrier, miroitier et serrurier à Rosny-sous-Bois (93). Urgence vitre cassée 24h/24, miroirs sur mesure, parois de douche, fenêtres et volets en Île-de-France. Devis immédiat au 07 83 38 68 24.", "/", ld)
@@ -294,15 +299,10 @@ def page_accueil():
   <div><p class="eyebrow">Nos services</p><h2>Verre, miroir, fenêtres et serrurerie</h2></div>
   {cartes_services()}
 </div></section>
-<section class="fond"><div class="wrap">
-  <div class="proof">
-    {img("avant-apres-vitre-cassee","Avant et après le remplacement d'une vitre cassée par Miroiterie Winter")}
-    <div class="txt">
-      <p class="eyebrow">Avant / après</p>
-      <h2>Une vitre cassée remplacée</h2>
-      <p>La vitre était fendue et tenue par du ruban adhésif. Nous avons coupé un verre neuf aux mesures et l'avons posé dans la fenêtre d'origine, sans toucher au cadre. Le chantier est laissé propre après notre passage.</p>
-    </div>
-  </div>
+<section class="fond" id="realisations"><div class="wrap">
+  <div class="tete-carrousel"><div><p class="eyebrow">Nos réalisations</p><h2>Avant / après de nos chantiers</h2></div>
+  <div class="fleches"><button type="button" class="fleche prec" aria-label="Photo précédente">&#8592;</button><button type="button" class="fleche suiv" aria-label="Photo suivante">&#8594;</button></div></div>
+  {carrousel()}
 </div></section>
 <section><div class="wrap atouts">
   <div><p class="eyebrow">Pourquoi nous appeler</p><h2>Un artisan local, joignable à toute heure</h2></div>
