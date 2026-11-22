@@ -37,7 +37,7 @@ Il n'est pas développeur : réponses courtes, simples, sans jargon. Toujours fi
 - Style d'écriture : phrases courtes, concrètes, vouvoiement, pas de superlatifs creux.
 
 ## Technique
-- Site statique sans framework. Une page d'accueil unique (choix de Dwinter le 19/11/2026 : pas de pages services, villes ni réalisations) + mentions légales + 404. Ces pages HTML, `sitemap.xml` et `robots.txt` sont GÉNÉRÉES par `outils/generer_site.py` (textes, 8 services, FAQ, avis, zone, liens réseaux sont dans ce script ; les listes SERVICES et VILLES et leurs fonctions de page ne sont plus utilisées, gardées si on rouvre des pages plus tard).
+- Site statique sans framework. Une page d accueil + 4 pages villes (Montreuil, Noisy-le-Sec, Villemomble, Fontenay-sous-Bois, choix de Dwinter le 22/11/2026, liste VILLES_ACTIVES dans le script ; pas de pages services ni réalisations) + mentions légales + 404. Ces pages HTML, `sitemap.xml` et `robots.txt` sont GÉNÉRÉES par `outils/generer_site.py` (textes, 8 services, FAQ, avis, zone, liens réseaux sont dans ce script ; les listes SERVICES et VILLES et leurs fonctions de page ne sont plus utilisées, gardées si on rouvre des pages plus tard).
 - Pour modifier un texte, une ville, un service, les avis ou la note : changer `outils/generer_site.py`, puis lancer `python3 outils/generer_site.py .` à la racine. Ne pas modifier les .html à la main (ils seraient écrasés).
 - Style commun : `style.css`. Animations : `site.js`. Images : `images/` (JPG/WebP < 300 Ko, texte `alt` en français).
 - Domaine officiel : https://miroiterie-winter.fr (balises canonical, sitemap, données structurées). Réseaux : Instagram https://www.instagram.com/miroiterie_winter/ et fiche Google Maps.
