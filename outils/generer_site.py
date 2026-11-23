@@ -427,8 +427,8 @@ PAGES = []
 
 # ---------------------------------------------------------------- accueil
 def page_accueil():
-    ld = [ENTREPRISE, faq_ld(FAQ_ACCUEIL), {"@context":"https://schema.org","@type":"WebSite","name":"Miroiterie Winter","url":DOMAINE+"/"}]
-    h = tete("Vitrier à Rosny-sous-Bois 24h/24 | Miroiterie Winter", "Vitrier à Rosny-sous-Bois (93) 24h/24 : vitre cassée, double vitrage, miroirs sur mesure, parois de douche, fenêtres. Devis immédiat au 07 83 38 68 24.", "/", ld)
+    ld = [ENTREPRISE, faq_ld(FAQ_ACCUEIL), {"@context":"https://schema.org","@type":"WebSite","name":"Miroiterie Winter","alternateName":["Miroiterie Winter Rosny-sous-Bois","miroiterie-winter.fr"],"url":DOMAINE+"/","publisher":{"@id":DOMAINE+"/#entreprise"}}]
+    h = tete("Miroiterie Winter | Vitrier à Rosny-sous-Bois 24h/24", "Miroiterie Winter, vitrier à Rosny-sous-Bois (93) 24h/24 : vitre cassée, double vitrage, miroirs sur mesure, parois de douche, fenêtres. Devis immédiat au 07 83 38 68 24.", "/", ld)
     h += hero("Vitrier · Miroitier · Serrurier à Rosny-sous-Bois", "Vitre cassée ? On intervient 24h/24.",
               "Vitrier à Rosny-sous-Bois : urgence casse, miroirs sur mesure, crédences, parois de douche, fenêtres et volets. Devis immédiat et remplacement le jour même dès que possible, partout en Île-de-France.")
     h += f'''<section id="services"><div class="wrap">
