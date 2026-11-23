@@ -153,6 +153,90 @@ VILLES = [
        q=("Intervenez-vous dans tout Paris ?","Oui, dans tous les arrondissements, et surtout dans l'est parisien, proche de notre base de Rosny-sous-Bois.")),
 ]
 
+# Arrondissements de Paris (demande de Dwinter le 23/11/2026 : « tout Paris »), reliés depuis la page Paris
+ARRONDISSEMENTS = [
+  dict(slug="vitrier-paris-1er", nom="Paris 1er", cp="75001", parent="vitrier-paris", voisines=['Paris 2e', 'Paris 4e', 'Paris 8e'],
+       texte='Nous intervenons dans le 1er arrondissement, au cœur de Paris, autour du Louvre, de Châtelet, des Halles et du Palais-Royal. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.',
+       detail='Beaucoup de commerces et de vitrines : après une casse, nous mettons la vitrine en sécurité puis posons le verre neuf.',
+       q=('Remplacez-vous une vitrine cassée dans le 1er arrondissement ?', 'Oui. Nous sécurisons la vitrine, puis nous posons un verre neuf adapté, feuilleté si besoin.')),
+  dict(slug="vitrier-paris-2e", nom="Paris 2e", cp="75002", parent="vitrier-paris", voisines=['Paris 1er', 'Paris 3e', 'Paris 9e'],
+       texte='Nous intervenons dans le 2e arrondissement, du Sentier à la Bourse, avec ses passages couverts et ses immeubles de bureaux. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.',
+       detail='Bureaux, ateliers et appartements anciens : nous remplaçons vitrages et portes vitrées, et posons des miroirs sur mesure.',
+       q=('Intervenez-vous dans les bureaux du 2e arrondissement ?', 'Oui. Nous remplaçons les vitrages, les portes vitrées et les cloisons en verre des bureaux et des commerces.')),
+  dict(slug="vitrier-paris-3e", nom="Paris 3e", cp="75003", parent="vitrier-paris", voisines=['Paris 2e', 'Paris 4e', 'Paris 10e', 'Paris 11e'],
+       texte="Nous intervenons dans le 3e arrondissement, dans le Haut-Marais et autour des Arts-et-Métiers, entre anciens ateliers et immeubles d'époque. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.",
+       detail="Les anciens ateliers ont souvent des verrières : nous changeons les verres en gardant la structure d'origine.",
+       q=("Changez-vous les verres d'une verrière dans le 3e arrondissement ?", "Oui. Nous mesurons chaque carreau et posons les verres neufs dans l'armature existante.")),
+  dict(slug="vitrier-paris-4e", nom="Paris 4e", cp="75004", parent="vitrier-paris", voisines=['Paris 1er', 'Paris 3e', 'Paris 5e', 'Paris 11e', 'Paris 12e'],
+       texte="Nous intervenons dans le 4e arrondissement, dans le Marais, sur l'île Saint-Louis et l'île de la Cité, autour de l'Hôtel de Ville. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.",
+       detail='Les immeubles anciens ont des fenêtres à petits carreaux : nous remplaçons un carreau cassé sans changer la fenêtre.',
+       q=('Peut-on remplacer un seul petit carreau dans le 4e arrondissement ?', "Oui. Nous coupons le verre à la mesure du carreau et le posons dans la fenêtre d'origine.")),
+  dict(slug="vitrier-paris-5e", nom="Paris 5e", cp="75005", parent="vitrier-paris", voisines=['Paris 4e', 'Paris 6e', 'Paris 13e', 'Paris 14e'],
+       texte='Nous intervenons dans le 5e arrondissement, dans le Quartier latin, autour du Panthéon, de la rue Mouffetard et du Jardin des Plantes. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.',
+       detail='Appartements anciens et logements étudiants : vitre cassée, fenêtre qui ferme mal ou miroir de salle de bain, nous intervenons.',
+       q=('Réglez-vous les fenêtres anciennes dans le 5e arrondissement ?', "Oui. Un réglage ou une crémone neuve suffit souvent pour qu'une fenêtre ferme bien à nouveau.")),
+  dict(slug="vitrier-paris-6e", nom="Paris 6e", cp="75006", parent="vitrier-paris", voisines=['Paris 5e', 'Paris 7e', 'Paris 14e', 'Paris 15e'],
+       texte="Nous intervenons dans le 6e arrondissement, à Saint-Germain-des-Prés, à l'Odéon et autour du jardin du Luxembourg. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.",
+       detail='Galeries, boutiques et appartements : nous posons miroirs sur mesure, crédences en verre et remplaçons les vitrines.',
+       q=('Posez-vous des miroirs sur mesure dans le 6e arrondissement ?', "Oui : miroirs muraux, au-dessus d'une cheminée ou de salle de bain, découpés à vos mesures et posés chez vous.")),
+  dict(slug="vitrier-paris-7e", nom="Paris 7e", cp="75007", parent="vitrier-paris", voisines=['Paris 6e', 'Paris 15e', 'Paris 8e'],
+       texte='Nous intervenons dans le 7e arrondissement, autour des Invalides, du Champ-de-Mars et du Gros-Caillou. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.',
+       detail='Les grands appartements ont souvent de hautes fenêtres et des miroirs muraux : nous remplaçons les vitrages et posons des miroirs à vos mesures.',
+       q=('Remplacez-vous les vitrages de grandes fenêtres dans le 7e arrondissement ?', 'Oui. Nous mesurons sur place et posons des vitrages neufs, simples ou doubles, dans vos fenêtres existantes.')),
+  dict(slug="vitrier-paris-8e", nom="Paris 8e", cp="75008", parent="vitrier-paris", voisines=['Paris 1er', 'Paris 9e', 'Paris 16e', 'Paris 17e'],
+       texte='Nous intervenons dans le 8e arrondissement, des Champs-Élysées à la Madeleine et au parc Monceau, entre bureaux, boutiques et appartements. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.',
+       detail='Pour les bureaux et les boutiques, nous remplaçons portes vitrées, vitrines et cloisons en verre.',
+       q=('Intervenez-vous pour les boutiques du 8e arrondissement ?', 'Oui. Nous remplaçons vitrines et portes vitrées, et mettons les lieux en sécurité après une casse.')),
+  dict(slug="vitrier-paris-9e", nom="Paris 9e", cp="75009", parent="vitrier-paris", voisines=['Paris 2e', 'Paris 8e', 'Paris 10e', 'Paris 18e'],
+       texte="Nous intervenons dans le 9e arrondissement, autour de l'Opéra, de la Nouvelle Athènes et de la rue des Martyrs. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.",
+       detail='Immeubles anciens et appartements rénovés : miroirs, crédences, parois de douche et doubles vitrages.',
+       q=('Posez-vous des parois de douche dans le 9e arrondissement ?', 'Oui : parois fixes ou coulissantes et pare-baignoire, mesurés chez vous puis posés.')),
+  dict(slug="vitrier-paris-10e", nom="Paris 10e", cp="75010", parent="vitrier-paris", voisines=['Paris 3e', 'Paris 9e', 'Paris 11e', 'Paris 19e'],
+       texte="Nous intervenons dans le 10e arrondissement, le long du canal Saint-Martin et autour des gares du Nord et de l'Est. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.",
+       detail='Commerces, ateliers et appartements : nous intervenons vite pour une vitre cassée et remplaçons les doubles vitrages.',
+       q=('Intervenez-vous la nuit dans le 10e arrondissement ?', 'Oui. Nous répondons 24h/24 et 7j/7 pour sécuriser une vitre ou une vitrine cassée.')),
+  dict(slug="vitrier-paris-11e", nom="Paris 11e", cp="75011", parent="vitrier-paris", voisines=['Paris 12e', 'Paris 20e', 'Paris 3e', 'Paris 10e'],
+       texte="Nous intervenons dans le 11e arrondissement, de la Bastille à République, d'Oberkampf à la rue de la Roquette. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.",
+       detail="Les cours d'artisans du 11e ont beaucoup d'ateliers vitrés et de verrières : nous remplaçons les verres en gardant la structure.",
+       q=('Venez-vous vite dans le 11e arrondissement ?', "Le 11e est dans l'est parisien, proche de notre base de Rosny-sous-Bois. Appelez-nous, nous vous disons tout de suite quand nous pouvons passer.")),
+  dict(slug="vitrier-paris-12e", nom="Paris 12e", cp="75012", parent="vitrier-paris", voisines=['Paris 11e', 'Paris 20e', 'Vincennes', 'Saint-Mandé'],
+       texte='Nous intervenons dans le 12e arrondissement, de Bercy à Nation, de la Bastille au bois de Vincennes. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.',
+       detail='Le 12e touche Vincennes et Saint-Mandé, sur notre route depuis Rosny-sous-Bois : vitres cassées, fenêtres, miroirs et volets roulants.',
+       q=('Posez-vous des volets roulants dans le 12e arrondissement ?', 'Oui : manuels, électriques ou solaires, fournis et posés sur vos fenêtres.')),
+  dict(slug="vitrier-paris-13e", nom="Paris 13e", cp="75013", parent="vitrier-paris", voisines=['Paris 5e', 'Paris 12e', 'Paris 14e'],
+       texte='Nous intervenons dans le 13e arrondissement, de la Butte-aux-Cailles au quartier des Olympiades et à Paris Rive Gauche. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.',
+       detail='Tours, résidences et immeubles récents : nous remplaçons doubles vitrages et réglons les fenêtres et portes-fenêtres.',
+       q=('Remplacez-vous les doubles vitrages en immeuble dans le 13e arrondissement ?', 'Oui. Nous remplaçons le vitrage sans changer la fenêtre quand le cadre est en bon état.')),
+  dict(slug="vitrier-paris-14e", nom="Paris 14e", cp="75014", parent="vitrier-paris", voisines=['Paris 6e', 'Paris 13e', 'Paris 15e'],
+       texte="Nous intervenons dans le 14e arrondissement, de Montparnasse à Alésia et Denfert-Rochereau, avec ses ateliers d'artistes. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.",
+       detail="Les ateliers d'artistes ont de grandes surfaces vitrées : nous remplaçons les verres abîmés à la bonne mesure.",
+       q=("Remplacez-vous les grandes vitres d'atelier dans le 14e arrondissement ?", 'Oui. Nous mesurons sur place et posons les verres neufs dans la structure existante.')),
+  dict(slug="vitrier-paris-15e", nom="Paris 15e", cp="75015", parent="vitrier-paris", voisines=['Paris 7e', 'Paris 14e', 'Paris 16e'],
+       texte='Nous intervenons dans le 15e arrondissement, de Vaugirard à Grenelle, de Convention à Beaugrenelle. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.',
+       detail='Le 15e est très résidentiel : nous y posons miroirs, crédences et parois de douche, et remplaçons les vitrages.',
+       q=('Posez-vous des crédences en verre dans le 15e arrondissement ?', 'Oui. Nous posons des crédences en verre laqué, découpées aux mesures de votre cuisine.')),
+  dict(slug="vitrier-paris-16e", nom="Paris 16e", cp="75016", parent="vitrier-paris", voisines=['Paris 8e', 'Paris 15e', 'Paris 17e'],
+       texte='Nous intervenons dans le 16e arrondissement, à Passy, Auteuil et autour du Trocadéro. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.',
+       detail='Grands appartements et hôtels particuliers : miroirs sur mesure, grandes fenêtres, portes vitrées et verrières.',
+       q=('Faites-vous les grands miroirs muraux dans le 16e arrondissement ?', 'Oui. Nous découpons le miroir à vos mesures et le posons, même sur tout un mur.')),
+  dict(slug="vitrier-paris-17e", nom="Paris 17e", cp="75017", parent="vitrier-paris", voisines=['Paris 8e', 'Paris 16e', 'Paris 18e'],
+       texte="Nous intervenons dans le 17e arrondissement, des Batignolles aux Ternes, jusqu'au quartier Clichy-Batignolles. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.",
+       detail='Immeubles anciens et logements neufs : vitres cassées, doubles vitrages, miroirs et parois de douche.',
+       q=('Intervenez-vous dans les immeubles neufs du 17e arrondissement ?', "Oui. Nous intervenons sur les vitrages, fenêtres et parois de douche, dans le neuf comme dans l'ancien.")),
+  dict(slug="vitrier-paris-18e", nom="Paris 18e", cp="75018", parent="vitrier-paris", voisines=['Paris 9e', 'Paris 17e', 'Paris 19e'],
+       texte="Nous intervenons dans le 18e arrondissement, de Montmartre à la Goutte d'Or et à Lamarck. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.",
+       detail="Sur la butte, beaucoup d'immeubles anciens ont des fenêtres et des portes vitrées d'origine : nous remplaçons les verres sans changer la menuiserie.",
+       q=('Remplacez-vous les verres de porte vitrée dans le 18e arrondissement ?', 'Oui : verre clair, dépoli ou cathédrale, coupé à la mesure et posé dans votre porte.')),
+  dict(slug="vitrier-paris-19e", nom="Paris 19e", cp="75019", parent="vitrier-paris", voisines=['Paris 10e', 'Paris 20e', 'Paris 18e'],
+       texte='Nous intervenons dans le 19e arrondissement, des Buttes-Chaumont à La Villette et au bassin de la Villette. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.',
+       detail="Le 19e est dans l'est parisien, proche de notre secteur : vitres cassées, doubles vitrages, volets roulants et réglages de fenêtres.",
+       q=('Réglez-vous les portes-fenêtres qui ferment mal dans le 19e arrondissement ?', "Oui. Nous réglons la porte-fenêtre ou changeons la crémone pour qu'elle ferme bien.")),
+  dict(slug="vitrier-paris-20e", nom="Paris 20e", cp="75020", parent="vitrier-paris", voisines=['Paris 11e', 'Paris 12e', 'Paris 19e', 'Bagnolet', 'Montreuil'],
+       texte='Nous intervenons dans le 20e arrondissement, de Belleville à Ménilmontant, du Père-Lachaise à Gambetta. Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal : nous venons depuis Rosny-sous-Bois.',
+       detail="Le 20e touche Bagnolet et Montreuil : c'est l'arrondissement le plus proche de notre base de Rosny-sous-Bois.",
+       q=('Êtes-vous proches du 20e arrondissement ?', 'Oui. Le 20e touche Bagnolet et Montreuil, tout près de Rosny-sous-Bois : appelez-nous pour une intervention rapide.')),
+]
+
 SERVICES_ACCUEIL = [
   ("Urgence vitre cassée","Mise en sécurité et remplacement de vitre, vitrine ou double vitrage, de jour comme de nuit.",True),
   ("Miroirs sur mesure","Ronds, ovales ou rectangulaires, découpés à vos mesures et posés chez vous.",False),
@@ -390,6 +474,11 @@ def page_service(s):
     ecrire(chemin, h); PAGES.append((chemin, "0.9"))
 
 # ---------------------------------------------------------------- villes
+def bloc_arrondissements(v):
+    liens = "".join(f'<a href="/{o["slug"]}/">Vitrier {e(o["nom"])}</a>' for o in ARRONDISSEMENTS if o is not v)
+    retour = '' if v["slug"] == "vitrier-paris" else '<a href="/vitrier-paris/">Vitrier Paris</a><a href="/">Vitrier Rosny-sous-Bois</a>'
+    return f'''<section class="fond"><div class="wrap"><div><p class="eyebrow">Paris</p><h2>Nous intervenons dans tous les arrondissements</h2></div><div class="villes">{retour}{liens}</div></div></section>'''
+
 def page_ville(v):
     chemin = f'/{v["slug"]}/'
     n = v["nom"]
@@ -398,17 +487,18 @@ def page_ville(v):
            v["q"],
            (f"Comment obtenir un devis {an} ?", f"Appelez le {TEL} ou envoyez une photo par SMS : nous vous donnons un devis immédiat.")]
     loc = dict(ENTREPRISE); loc = {**ENTREPRISE, "areaServed":[{"@type":"City","name":n}] + [a for a in ENTREPRISE["areaServed"] if a["name"] != n]}
-    ld = [loc, fil_ld([("Accueil","/"),(f"Vitrier {n}",chemin)]), faq_ld(faq)]
+    ariane = [("Accueil","/")] + ([("Vitrier Paris","/vitrier-paris/")] if v.get("parent") else []) + [(f"Vitrier {n}",chemin)]
+    ld = [loc, fil_ld(ariane), faq_ld(faq)]
     titre = f"Vitrier {n} ({v['cp']}) 24h/24 | Miroiterie Winter"
     if len(titre) > 60: titre = f"Vitrier {n} ({v['cp']}) | Miroiterie Winter"
     desc = f"Vitrier {an} ({v['cp']}) 24h/24 : vitre cassée, double vitrage, miroirs, parois de douche, fenêtres. Devis immédiat au {TEL}."
     h = tete(titre, desc, chemin, ld)
-    h += '<div class="wrap">' + fil([("Accueil","/"),(f"Vitrier {n}",chemin)]) + '</div>'
+    h += '<div class="wrap">' + fil(ariane) + '</div>'
     h += hero(f"Vitrier · Miroitier · Serrurier {an}", f"Vitrier {an} ({v['cp']}), 24h/24",
               f"Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal {an} ? Miroiterie Winter, artisan basé à Rosny-sous-Bois, intervient rapidement avec un devis immédiat.")
     h += f'''<section><div class="wrap">
   <div class="deux"><div class="bloc"><h2>Votre vitrier de proximité {e(an)}</h2><p>{e(v["texte"])}</p><p>{e(v["detail"])}</p>
-  <p>Nous intervenons aussi dans les villes voisines : {e(", ".join(v["voisines"]))}.</p></div>
+  <p>Nous intervenons aussi {"près d'ici" if v.get("parent") else "dans les villes voisines"} : {e(", ".join(v["voisines"]))}.</p></div>
   <div class="bloc"><h2>Nos interventions {e(an)}</h2><ul>
     <li>Urgence vitre cassée 24h/24 et mise en sécurité</li>
     <li>Remplacement de vitre, de vitrine et de double vitrage</li>
@@ -421,7 +511,8 @@ def page_ville(v):
 </div></section>
 {bloc_avis()}
 {bloc_faq(faq, f"Vitrier {an} : vos questions")}
-<section class="fond"><div class="wrap"><div><p class="eyebrow">Autres villes</p><h2>Nous intervenons aussi à</h2></div><div class="villes"><a href="/">Vitrier Rosny-sous-Bois</a>{"".join(f'<a href="/{o["slug"]}/">Vitrier {e(o["nom"])}</a>' for o in VILLES if o is not v and o["slug"] in VILLES_ACTIVES)}</div></div></section>
+{bloc_arrondissements(v) if v["slug"] == "vitrier-paris" or v.get("parent") else ""}
+{"" if v.get("parent") else f'''<section class="fond"><div class="wrap"><div><p class="eyebrow">Autres villes</p><h2>Nous intervenons aussi à</h2></div><div class="villes"><a href="/">Vitrier Rosny-sous-Bois</a>{"".join(f'<a href="/{o["slug"]}/">Vitrier {e(o["nom"])}</a>' for o in VILLES if o is not v and o["slug"] in VILLES_ACTIVES)}</div></div></section>'''}
 '''
     h += pied()
     ecrire(chemin, h); PAGES.append((chemin, "0.8"))
@@ -469,6 +560,8 @@ def page_404():
 page_accueil()
 for v in VILLES:
     if v["slug"] in VILLES_ACTIVES: page_ville(v)
+for v in ARRONDISSEMENTS:
+    page_ville(v)
 page_mentions()
 page_404()
 
