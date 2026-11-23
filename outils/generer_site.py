@@ -88,19 +88,69 @@ SERVICES = [
 
 VILLES = [
   dict(slug="vitrier-montreuil", nom="Montreuil", cp="93100", voisines=["Bagnolet","Fontenay-sous-Bois","Romainville","Rosny-sous-Bois"],
-       texte="Montreuil est juste à côté de Rosny-sous-Bois. Entre ses immeubles, ses maisons de ville et ses anciens ateliers, on y trouve beaucoup de verrières et de grandes surfaces vitrées : nous remplaçons les verres en gardant la structure."),
+       texte="Montreuil est juste à côté de Rosny-sous-Bois. Entre ses immeubles, ses maisons de ville et ses anciens ateliers, on y trouve beaucoup de verrières et de grandes surfaces vitrées : nous remplaçons les verres en gardant la structure.",
+       detail="Du Bas-Montreuil aux quartiers du haut, nous posons aussi des miroirs sur mesure, des crédences et des parois de douche dans les appartements rénovés.",
+       q=("Remplacez-vous les verres d'une verrière d'atelier à Montreuil ?","Oui. Nous mesurons chaque carreau, coupons les verres à la bonne taille et les posons dans l'armature existante, sans la changer.")),
   dict(slug="vitrier-noisy-le-sec", nom="Noisy-le-Sec", cp="93130", voisines=["Bondy","Romainville","Rosny-sous-Bois"],
-       texte="Noisy-le-Sec est limitrophe de Rosny-sous-Bois. Pour une vitre cassée, une fenêtre qui ferme mal ou un miroir sur mesure, nous sommes à quelques minutes."),
+       texte="Noisy-le-Sec est limitrophe de Rosny-sous-Bois. Pour une vitre cassée, une fenêtre qui ferme mal ou un miroir sur mesure, nous sommes à quelques minutes.",
+       detail="Pavillons, immeubles et commerces : nous remplaçons les doubles vitrages fendus et réglons les fenêtres et portes-fenêtres qui frottent ou ferment mal.",
+       q=("Pouvez-vous régler une fenêtre qui ferme mal à Noisy-le-Sec ?","Oui. Souvent un réglage ou le remplacement de la crémone suffit, sans changer la fenêtre.")),
   dict(slug="vitrier-villemomble", nom="Villemomble", cp="93250", voisines=["Le Raincy","Gagny","Rosny-sous-Bois"],
-       texte="Villemomble touche Rosny-sous-Bois. Maisons individuelles et pavillons y sont nombreux : nous y posons fenêtres, volets roulants et portes-fenêtres, et remplaçons les verres de verrières et marquises."),
+       texte="Villemomble touche Rosny-sous-Bois. Maisons individuelles et pavillons y sont nombreux : nous y posons fenêtres, volets roulants et portes-fenêtres, et remplaçons les verres de verrières et marquises.",
+       detail="Pour les maisons, nous proposons aussi les volets roulants solaires, sans câble à tirer jusqu'au tableau électrique.",
+       q=("Posez-vous des volets roulants à Villemomble ?","Oui : manuels, électriques ou solaires, fournis et posés sur vos fenêtres existantes ou neuves.")),
   dict(slug="vitrier-bondy", nom="Bondy", cp="93140", voisines=["Noisy-le-Sec","Les Pavillons-sous-Bois","Rosny-sous-Bois"],
-       texte="Bondy est à quelques minutes de notre base de Rosny-sous-Bois. Particuliers, commerces et bailleurs nous appellent pour sécuriser une vitre cassée ou remplacer un vitrage."),
-  dict(slug="vitrier-fontenay-sous-bois", nom="Fontenay-sous-Bois", cp="94120", voisines=["Vincennes","Montreuil","Rosny-sous-Bois"],
-       texte="Fontenay-sous-Bois, dans le Val-de-Marne, est voisine de Rosny-sous-Bois. Nous y intervenons pour les urgences comme pour les projets de miroirs, de parois de douche et de fenêtres."),
-  dict(slug="vitrier-vincennes", nom="Vincennes", cp="94300", voisines=["Fontenay-sous-Bois","Saint-Mandé","Montreuil","Paris 12e et 20e"],
-       texte="À Vincennes, beaucoup d'appartements anciens ont de grandes fenêtres, des miroirs muraux et des salles de bain à rénover. Nous posons miroirs sur mesure, parois de douche et remplaçons les vitrages."),
+       texte="Bondy est à quelques minutes de notre base de Rosny-sous-Bois. Particuliers, commerces et bailleurs nous appellent pour sécuriser une vitre cassée ou remplacer un vitrage.",
+       detail="Après un bris de glace ou une effraction, nous mettons d'abord les lieux en sécurité, puis nous posons le verre neuf aux bonnes mesures.",
+       q=("Remplacez-vous les vitrines de commerce à Bondy ?","Oui. Nous sécurisons la vitrine cassée puis posons un verre neuf adapté, feuilleté si besoin.")),
   dict(slug="vitrier-bagnolet", nom="Bagnolet", cp="93170", voisines=["Montreuil","Romainville","Paris 20e"],
-       texte="Bagnolet est proche de Rosny-sous-Bois et des portes de Paris. Nous y remplaçons vitres, vitrines et doubles vitrages, et nous posons parois de douche et miroirs sur mesure."),
+       texte="Bagnolet est proche de Rosny-sous-Bois et des portes de Paris. Nous y remplaçons vitres, vitrines et doubles vitrages, et nous posons parois de douche et miroirs sur mesure.",
+       detail="Dans les immeubles comme dans les maisons, nous remplaçons un seul vitrage sans toucher au cadre quand la menuiserie est en bon état.",
+       q=("Peut-on changer seulement le double vitrage à Bagnolet ?","Oui. Si le cadre est en bon état, nous remplaçons uniquement le vitrage, ce qui coûte moins cher qu'une fenêtre neuve.")),
+  dict(slug="vitrier-fontenay-sous-bois", nom="Fontenay-sous-Bois", cp="94120", voisines=["Vincennes","Montreuil","Rosny-sous-Bois"],
+       texte="Fontenay-sous-Bois, dans le Val-de-Marne, est voisine de Rosny-sous-Bois. Nous y intervenons pour les urgences comme pour les projets de miroirs, de parois de douche et de fenêtres.",
+       detail="Pour une salle de bain, nous prenons les mesures sur place et posons une paroi de douche ou un pare-baignoire adapté à votre espace.",
+       q=("Posez-vous des parois de douche sur mesure à Fontenay-sous-Bois ?","Oui : parois fixes ou coulissantes et pare-baignoire, mesurés chez vous puis posés.")),
+  dict(slug="vitrier-vincennes", nom="Vincennes", cp="94300", voisines=["Fontenay-sous-Bois","Saint-Mandé","Montreuil","Paris 12e et 20e"],
+       texte="À Vincennes, beaucoup d'appartements anciens ont de grandes fenêtres, des miroirs muraux et des salles de bain à rénover. Nous posons miroirs sur mesure, parois de douche et remplaçons les vitrages.",
+       detail="Un miroir au-dessus d'une cheminée ou sur tout un mur : nous le découpons à vos mesures et le posons proprement.",
+       q=("Faites-vous des miroirs sur mesure à Vincennes ?","Oui : ronds, ovales ou rectangulaires, à vos mesures, fournis et posés chez vous.")),
+  dict(slug="vitrier-romainville", nom="Romainville", cp="93230", voisines=["Noisy-le-Sec","Bagnolet","Les Lilas","Montreuil"],
+       texte="Romainville, entre Noisy-le-Sec et Bagnolet, mêle pavillons et immeubles récents. Nous y intervenons pour les vitres cassées, les doubles vitrages et les fenêtres qui ferment mal.",
+       detail="Dans les logements neufs comme anciens, nous posons aussi crédences en verre et miroirs sur mesure.",
+       q=("Posez-vous des crédences en verre à Romainville ?","Oui. Nous posons des crédences en verre laqué, découpées aux mesures de votre cuisine.")),
+  dict(slug="vitrier-gagny", nom="Gagny", cp="93220", voisines=["Villemomble","Le Raincy","Neuilly-sur-Marne","Montfermeil"],
+       texte="Gagny est une ville surtout résidentielle, avec beaucoup de maisons. Nous y remplaçons fenêtres, portes-fenêtres et volets roulants, et réparons les vitres cassées.",
+       detail="Pour une maison, nous pouvons changer une seule fenêtre ou toutes les menuiseries, avec un devis immédiat.",
+       q=("Remplacez-vous toutes les fenêtres d'une maison à Gagny ?","Oui. Nous fournissons et posons fenêtres et portes-fenêtres, une seule ou toute la maison.")),
+  dict(slug="vitrier-le-raincy", nom="Le Raincy", a="au Raincy", cp="93340", voisines=["Villemomble","Gagny","Livry-Gargan","Clichy-sous-Bois"],
+       texte="Au Raincy, beaucoup de maisons anciennes ont des marquises, des verrières et des portes vitrées. Nous remplaçons les verres en gardant les ferronneries d'origine.",
+       detail="Verre cathédrale, verre feuilleté ou verre armé : nous choisissons avec vous le verre qui respecte le style de la maison.",
+       q=("Remplacez-vous les verres d'une marquise ancienne au Raincy ?","Oui. Nous déposons les anciens verres et posons des verres neufs à l'identique dans l'armature existante.")),
+  dict(slug="vitrier-neuilly-plaisance", nom="Neuilly-Plaisance", cp="93360", voisines=["Rosny-sous-Bois","Neuilly-sur-Marne","Le Perreux-sur-Marne","Villemomble"],
+       texte="Neuilly-Plaisance partage le plateau d'Avron avec Rosny-sous-Bois : nous sommes tout près. Nous y intervenons pour les vitres cassées, les fenêtres et les volets roulants.",
+       detail="Des bords de Marne au plateau, nous réglons et remplaçons aussi les crémones des fenêtres qui ne ferment plus.",
+       q=("Intervenez-vous vite à Neuilly-Plaisance ?","Neuilly-Plaisance est voisine de Rosny-sous-Bois, notre base. Appelez-nous, nous vous disons tout de suite quand nous pouvons passer.")),
+  dict(slug="vitrier-neuilly-sur-marne", nom="Neuilly-sur-Marne", cp="93330", voisines=["Neuilly-Plaisance","Gagny","Noisy-le-Grand"],
+       texte="À Neuilly-sur-Marne, nous intervenons dans les pavillons comme dans les résidences pour remplacer vitres et doubles vitrages, et poser fenêtres et volets roulants.",
+       detail="Pour les copropriétés et les bailleurs, nous remplaçons aussi les vitrages des parties communes.",
+       q=("Travaillez-vous pour les copropriétés à Neuilly-sur-Marne ?","Oui. Nous intervenons pour les syndics, les agences et les bailleurs, sur les logements comme sur les parties communes.")),
+  dict(slug="vitrier-le-perreux-sur-marne", nom="Le Perreux-sur-Marne", a="au Perreux-sur-Marne", cp="94170", voisines=["Nogent-sur-Marne","Neuilly-Plaisance","Bry-sur-Marne","Fontenay-sous-Bois"],
+       texte="Le Perreux-sur-Marne compte beaucoup de maisons et de villas. Nous y posons miroirs sur mesure, parois de douche, fenêtres et volets roulants.",
+       detail="Pour une maison ancienne, nous pouvons aussi remplacer les verres d'une véranda ou d'une verrière.",
+       q=("Remplacez-vous un verre de véranda au Perreux-sur-Marne ?","Oui. Nous mesurons le verre abîmé et posons un verre neuf adapté dans la structure existante.")),
+  dict(slug="vitrier-nogent-sur-marne", nom="Nogent-sur-Marne", cp="94130", voisines=["Le Perreux-sur-Marne","Fontenay-sous-Bois","Vincennes","Joinville-le-Pont"],
+       texte="À Nogent-sur-Marne, entre appartements anciens et maisons des bords de Marne, nous remplaçons les vitrages et posons miroirs, crédences et parois de douche.",
+       detail="Pour une salle de bain ou une cuisine à rénover, nous venons prendre les mesures et vous donnons un devis immédiat.",
+       q=("Venez-vous prendre les mesures à Nogent-sur-Marne ?","Oui. Pour un miroir, une crédence ou une paroi de douche, nous mesurons chez vous avant de fabriquer.")),
+  dict(slug="vitrier-noisy-le-grand", nom="Noisy-le-Grand", cp="93160", voisines=["Neuilly-sur-Marne","Bry-sur-Marne","Champs-sur-Marne"],
+       texte="À Noisy-le-Grand, nous intervenons pour les particuliers, les commerces et les bureaux : vitre cassée, vitrine, double vitrage, miroirs et parois de douche.",
+       detail="Après une casse dans un commerce ou un bureau, nous mettons les lieux en sécurité puis posons le verre neuf.",
+       q=("Intervenez-vous pour les bureaux et commerces à Noisy-le-Grand ?","Oui. Nous remplaçons vitrines, portes vitrées et vitrages de bureaux, et mettons les lieux en sécurité après une casse.")),
+  dict(slug="vitrier-paris", nom="Paris", cp="75", voisines=["Paris 11e","Paris 12e","Paris 19e","Paris 20e"],
+       texte="Depuis Rosny-sous-Bois, nous intervenons dans tout Paris, et surtout dans l'est : 11e, 12e, 19e et 20e arrondissements. Vitres cassées, doubles vitrages, miroirs et crédences.",
+       detail="Dans les appartements anciens, nous posons miroirs sur mesure et parois de douche, et remplaçons les verres de verrières d'atelier.",
+       q=("Intervenez-vous dans tout Paris ?","Oui, dans tous les arrondissements, et surtout dans l'est parisien, proche de notre base de Rosny-sous-Bois.")),
 ]
 
 SERVICES_ACCUEIL = [
@@ -114,8 +164,8 @@ SERVICES_ACCUEIL = [
   ("Serrurerie et réglages","Réglage et remplacement de crémones, portes, fenêtres et portes blindées qui ferment mal.",False),
 ]
 
-# Pages villes en ligne (choix de Dwinter le 22/11/2026 : 4 villes proches)
-VILLES_ACTIVES = ["vitrier-montreuil","vitrier-noisy-le-sec","vitrier-villemomble","vitrier-fontenay-sous-bois"]
+# Pages villes en ligne (22/11/2026 : 4 villes ; 23/11/2026 : Dwinter demande toutes les villes de sa zone)
+VILLES_ACTIVES = [v["slug"] for v in VILLES]
 
 REALISATIONS = [
   ("avant-apres-vitre-cassee","Vitre cassée remplacée","La vitre était fendue et tenue par du ruban adhésif. Verre neuf coupé aux mesures et posé dans le cadre d'origine."),
@@ -226,7 +276,7 @@ def pied():
       <p class="reseaux"><a href="{INSTAGRAM}" rel="noopener" target="_blank" aria-label="Instagram Miroiterie Winter">{ICON_IG}<span>Instagram</span></a><a href="{MAPS}" rel="noopener" target="_blank" aria-label="Miroiterie Winter sur Google Maps">{ICON_MAP}<span>Google Maps</span></a></p>
       <p><a class="lien-avis" href="{AVIS}" rel="noopener" target="_blank">★ Laisser un avis Google</a></p></div>
     <div><p class="ftitre">Sur cette page</p><ul><li><a href="/#services">Nos services</a></li><li><a href="/#avis">Avis clients</a></li><li><a href="/#zone">Zone d'intervention</a></li><li><a href="/#faq">Questions fréquentes</a></li><li><a href="/#contact">Contact et devis</a></li></ul></div>
-    <div><p class="ftitre">Villes</p><ul><li><a href="/">Vitrier Rosny-sous-Bois</a></li>{"".join(f'<li><a href="/{v["slug"]}/">Vitrier {e(v["nom"])}</a></li>' for v in VILLES if v["slug"] in VILLES_ACTIVES)}</ul></div>
+    <div><p class="ftitre">Villes</p><ul class="villes-pied"><li><a href="/">Vitrier Rosny-sous-Bois</a></li>{"".join(f'<li><a href="/{v["slug"]}/">Vitrier {e(v["nom"])}</a></li>' for v in VILLES if v["slug"] in VILLES_ACTIVES)}</ul></div>
   </div>
   <p class="legal">© 2026 Miroiterie Winter · Dwinter Morisseau, entrepreneur individuel · <a href="/mentions-legales/">Mentions légales</a></p>
 </div></footer>
@@ -288,7 +338,7 @@ PAGES = []
 # ---------------------------------------------------------------- accueil
 def page_accueil():
     ld = [ENTREPRISE, faq_ld(FAQ_ACCUEIL), {"@context":"https://schema.org","@type":"WebSite","name":"Miroiterie Winter","url":DOMAINE+"/"}]
-    h = tete("Vitrier à Rosny-sous-Bois 24h/24 | Miroiterie Winter", "Miroiterie Winter, vitrier, miroitier et serrurier à Rosny-sous-Bois (93). Urgence vitre cassée 24h/24, miroirs sur mesure, parois de douche, fenêtres et volets en Île-de-France. Devis immédiat au 07 83 38 68 24.", "/", ld)
+    h = tete("Vitrier à Rosny-sous-Bois 24h/24 | Miroiterie Winter", "Vitrier à Rosny-sous-Bois (93) 24h/24 : vitre cassée, double vitrage, miroirs sur mesure, parois de douche, fenêtres. Devis immédiat au 07 83 38 68 24.", "/", ld)
     h += hero("Vitrier · Miroitier · Serrurier à Rosny-sous-Bois", "Vitre cassée ? On intervient 24h/24.",
               "Vitrier à Rosny-sous-Bois : urgence casse, miroirs sur mesure, crédences, parois de douche, fenêtres et volets. Devis immédiat et remplacement le jour même dès que possible, partout en Île-de-France.")
     h += f'''<section id="services"><div class="wrap">
@@ -343,20 +393,23 @@ def page_service(s):
 def page_ville(v):
     chemin = f'/{v["slug"]}/'
     n = v["nom"]
-    faq = [(f"Intervenez-vous en urgence à {n} ?", f"Oui. Nous intervenons 24h/24 et 7j/7 à {n} ({v['cp']}) pour sécuriser une vitre cassée et remplacer le vitrage, souvent le jour même quand c'est possible."),
-           (f"Comment obtenir un devis à {n} ?", f"Appelez le {TEL} ou envoyez une photo par SMS : nous vous donnons un devis immédiat.")]
-    loc = dict(ENTREPRISE); loc = {**ENTREPRISE, "areaServed":[{"@type":"City","name":n}] + ENTREPRISE["areaServed"]}
+    an = v.get("a", "à " + n)  # « au Raincy », « au Perreux-sur-Marne »
+    faq = [(f"Intervenez-vous en urgence {an} ?", f"Oui. Nous intervenons 24h/24 et 7j/7 {an} ({v['cp']}) pour sécuriser une vitre cassée et remplacer le vitrage, souvent le jour même quand c'est possible."),
+           v["q"],
+           (f"Comment obtenir un devis {an} ?", f"Appelez le {TEL} ou envoyez une photo par SMS : nous vous donnons un devis immédiat.")]
+    loc = dict(ENTREPRISE); loc = {**ENTREPRISE, "areaServed":[{"@type":"City","name":n}] + [a for a in ENTREPRISE["areaServed"] if a["name"] != n]}
     ld = [loc, fil_ld([("Accueil","/"),(f"Vitrier {n}",chemin)]), faq_ld(faq)]
-    titre = f"Vitrier à {n} ({v['cp']}) 24h/24 | Miroiterie Winter"
-    desc = f"Vitrier à {n} ({v['cp']}) : vitre cassée 24h/24, double vitrage, miroirs sur mesure, parois de douche, fenêtres et crémones. Artisan basé à Rosny-sous-Bois. Devis immédiat au {TEL}."
+    titre = f"Vitrier {n} ({v['cp']}) 24h/24 | Miroiterie Winter"
+    if len(titre) > 60: titre = f"Vitrier {n} ({v['cp']}) | Miroiterie Winter"
+    desc = f"Vitrier {an} ({v['cp']}) 24h/24 : vitre cassée, double vitrage, miroirs, parois de douche, fenêtres. Devis immédiat au {TEL}."
     h = tete(titre, desc, chemin, ld)
     h += '<div class="wrap">' + fil([("Accueil","/"),(f"Vitrier {n}",chemin)]) + '</div>'
-    h += hero(f"Vitrier · Miroitier · Serrurier à {n}", f"Vitrier à {n} ({v['cp']}), 24h/24",
-              f"Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal à {n} ? Miroiterie Winter, artisan basé à Rosny-sous-Bois, intervient rapidement avec un devis immédiat.")
+    h += hero(f"Vitrier · Miroitier · Serrurier {an}", f"Vitrier {an} ({v['cp']}), 24h/24",
+              f"Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal {an} ? Miroiterie Winter, artisan basé à Rosny-sous-Bois, intervient rapidement avec un devis immédiat.")
     h += f'''<section><div class="wrap">
-  <div class="deux"><div class="bloc"><h2>Votre vitrier de proximité à {e(n)}</h2><p>{e(v["texte"])}</p>
+  <div class="deux"><div class="bloc"><h2>Votre vitrier de proximité {e(an)}</h2><p>{e(v["texte"])}</p><p>{e(v["detail"])}</p>
   <p>Nous intervenons aussi dans les villes voisines : {e(", ".join(v["voisines"]))}.</p></div>
-  <div class="bloc"><h2>Nos interventions à {e(n)}</h2><ul>
+  <div class="bloc"><h2>Nos interventions {e(an)}</h2><ul>
     <li>Urgence vitre cassée 24h/24 et mise en sécurité</li>
     <li>Remplacement de vitre, de vitrine et de double vitrage</li>
     <li>Miroirs sur mesure et crédences en verre</li>
@@ -367,7 +420,7 @@ def page_ville(v):
   </ul><p><a href="/#services">Voir le détail de nos services →</a></p></div></div>
 </div></section>
 {bloc_avis()}
-{bloc_faq(faq, f"Vitrier à {n} : vos questions")}
+{bloc_faq(faq, f"Vitrier {an} : vos questions")}
 <section class="fond"><div class="wrap"><div><p class="eyebrow">Autres villes</p><h2>Nous intervenons aussi à</h2></div><div class="villes"><a href="/">Vitrier Rosny-sous-Bois</a>{"".join(f'<a href="/{o["slug"]}/">Vitrier {e(o["nom"])}</a>' for o in VILLES if o is not v and o["slug"] in VILLES_ACTIVES)}</div></div></section>
 '''
     h += pied()
