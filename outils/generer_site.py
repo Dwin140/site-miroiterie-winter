@@ -3,6 +3,7 @@
 Usage : python3 generer_site.py <dossier_du_depot>
 """
 import json, os, sys, html
+from departements import DEPARTEMENTS, DEP_EXISTANTES, THEMES, NOUVELLES_VILLES
 
 OUT = sys.argv[1]
 DOMAINE = "https://miroiterie-winter.fr"
@@ -249,7 +250,11 @@ SERVICES_ACCUEIL = [
 ]
 
 # Pages villes en ligne (22/11/2026 : 4 villes ; 23/11/2026 : Dwinter demande toutes les villes de sa zone)
+VILLES_PIED = [v["slug"] for v in VILLES]  # villes listées dans le pied de page (les 16 proches)
+for v in VILLES: v["dep"] = DEP_EXISTANTES.get(v["slug"])
+VILLES += NOUVELLES_VILLES  # villes principales des départements (23/11/2026)
 VILLES_ACTIVES = [v["slug"] for v in VILLES]
+DEP = {d["num"]: d for d in DEPARTEMENTS}
 
 REALISATIONS = [
   ("avant-apres-vitre-cassee","Vitre cassée remplacée","La vitre était fendue et tenue par du ruban adhésif. Verre neuf coupé aux mesures et posé dans le cadre d'origine."),
@@ -360,7 +365,8 @@ def pied():
       <p class="reseaux"><a href="{INSTAGRAM}" rel="noopener" target="_blank" aria-label="Instagram Miroiterie Winter">{ICON_IG}<span>Instagram</span></a><a href="{MAPS}" rel="noopener" target="_blank" aria-label="Miroiterie Winter sur Google Maps">{ICON_MAP}<span>Google Maps</span></a></p>
       <p><a class="lien-avis" href="{AVIS}" rel="noopener" target="_blank">★ Laisser un avis Google</a></p></div>
     <div><p class="ftitre">Sur cette page</p><ul><li><a href="/#services">Nos services</a></li><li><a href="/#avis">Avis clients</a></li><li><a href="/#zone">Zone d'intervention</a></li><li><a href="/#faq">Questions fréquentes</a></li><li><a href="/#contact">Contact et devis</a></li></ul></div>
-    <div><p class="ftitre">Villes</p><ul class="villes-pied"><li><a href="/">Vitrier Rosny-sous-Bois</a></li>{"".join(f'<li><a href="/{v["slug"]}/">Vitrier {e(v["nom"])}</a></li>' for v in VILLES if v["slug"] in VILLES_ACTIVES)}</ul></div>
+    <div><p class="ftitre">Villes</p><ul class="villes-pied"><li><a href="/">Vitrier Rosny-sous-Bois</a></li>{"".join(f'<li><a href="/{v["slug"]}/">Vitrier {e(v["nom"])}</a></li>' for v in VILLES if v["slug"] in VILLES_PIED)}</ul></div>
+    <div><p class="ftitre">Départements</p><ul><li><a href="/vitrier-paris/">Vitrier Paris (75)</a></li>{"".join(f'<li><a href="/{d["slug"]}/">Vitrier {e(d["nom"])} ({d["num"]})</a></li>' for d in DEPARTEMENTS)}</ul></div>
   </div>
   <p class="legal">© 2026 Miroiterie Winter · Dwinter Morisseau, entrepreneur individuel · <a href="/mentions-legales/">Mentions légales</a></p>
 </div></footer>
@@ -394,7 +400,7 @@ def bloc_avis():
     return f'''<section id="avis"><div class="wrap">
   <div class="score"><strong>{NOTE}</strong><span class="stars" aria-label="5 étoiles">★★★★★</span><span>{NB_AVIS} avis sur Google</span></div>
   <div class="reviews">{fig}</div>
-  <p class="zone" id="zone"><b>Zone d'intervention :</b> {zone_liens()} et toute l'Île-de-France.</p>
+  <p class="zone" id="zone"><b>Zone d'intervention :</b> {zone_liens()} et toute l'Île-de-France : {", ".join(f'<a href="/{d["slug"]}/">{e(d["nom"])} ({d["num"]})</a>' for d in DEPARTEMENTS)}.</p>
 </div></section>'''
 
 def hero(eyebrow, h1, lead, facts=True):
@@ -421,8 +427,8 @@ PAGES = []
 
 # ---------------------------------------------------------------- accueil
 def page_accueil():
-    ld = [ENTREPRISE, faq_ld(FAQ_ACCUEIL), {"@context":"https://schema.org","@type":"WebSite","name":"Miroiterie Winter","url":DOMAINE+"/"}]
-    h = tete("Vitrier à Rosny-sous-Bois 24h/24 | Miroiterie Winter", "Vitrier à Rosny-sous-Bois (93) 24h/24 : vitre cassée, double vitrage, miroirs sur mesure, parois de douche, fenêtres. Devis immédiat au 07 83 38 68 24.", "/", ld)
+    ld = [ENTREPRISE, faq_ld(FAQ_ACCUEIL), {"@context":"https://schema.org","@type":"WebSite","name":"Miroiterie Winter","alternateName":["Miroiterie Winter Rosny-sous-Bois","miroiterie-winter.fr"],"url":DOMAINE+"/","publisher":{"@id":DOMAINE+"/#entreprise"}}]
+    h = tete("Miroiterie Winter | Vitrier à Rosny-sous-Bois 24h/24", "Miroiterie Winter, vitrier à Rosny-sous-Bois (93) 24h/24 : vitre cassée, double vitrage, miroirs, parois de douche, fenêtres. Devis immédiat au 07 83 38 68 24.", "/", ld)
     h += hero("Vitrier · Miroitier · Serrurier à Rosny-sous-Bois", "Vitre cassée ? On intervient 24h/24.",
               "Vitrier à Rosny-sous-Bois : urgence casse, miroirs sur mesure, crédences, parois de douche, fenêtres et volets. Devis immédiat et remplacement le jour même dès que possible, partout en Île-de-France.")
     h += f'''<section id="services"><div class="wrap">
@@ -474,6 +480,47 @@ def page_service(s):
     ecrire(chemin, h); PAGES.append((chemin, "0.9"))
 
 # ---------------------------------------------------------------- villes
+def bloc_autres_villes(v, dep):
+    if dep:
+        proches = [o for o in VILLES if o.get("dep") == dep["num"] and o["slug"] != v["slug"]]
+        tete = f'<a href="/{dep["slug"]}/">Vitrier {e(dep["nom"])} ({dep["num"]})</a>' + ('<a href="/">Vitrier Rosny-sous-Bois</a>' if dep["num"] == "93" else '')
+        titre = f"Nous intervenons aussi {dep['de']}"
+    else:
+        proches = [o for o in VILLES if o["slug"] in VILLES_PIED and o["slug"] != v["slug"]]
+        tete = '<a href="/">Vitrier Rosny-sous-Bois</a>'
+        titre = "Nous intervenons aussi à"
+    liens = "".join(f'<a href="/{o["slug"]}/">Vitrier {e(o["nom"])}</a>' for o in proches)
+    return f'''<section class="fond"><div class="wrap"><div><p class="eyebrow">Autres villes</p><h2>{e(titre)}</h2></div><div class="villes">{tete}{liens}</div></div></section>'''
+
+def page_departement(d):
+    chemin = f'/{d["slug"]}/'
+    villes = [o for o in VILLES if o.get("dep") == d["num"]]
+    faq = [(f"Intervenez-vous partout {d['de']} ?", f"Oui. Nous intervenons dans toutes les communes {d['de']} ({d['num']}), pour les urgences comme pour les projets. Appelez-nous pour savoir quand nous pouvons passer."),
+           (f"Comment obtenir un devis {d['de']} ?", f"Appelez le {TEL} ou envoyez une photo par SMS : nous vous donnons un devis immédiat.")]
+    loc = {**ENTREPRISE, "areaServed":[{"@type":"AdministrativeArea","name":f"{d['nom']} ({d['num']})"}] + [{"@type":"City","name":o["nom"]} for o in villes]}
+    ariane = [("Accueil","/"),(f"Vitrier {d['nom']}",chemin)]
+    ld = [loc, fil_ld(ariane), faq_ld(faq)]
+    titre = f"Vitrier {d['nom']} ({d['num']}) 24h/24 | Miroiterie Winter"
+    if len(titre) > 60: titre = f"Vitrier {d['nom']} ({d['num']}) | Miroiterie Winter"
+    desc = f"Vitrier {d['de']} ({d['num']}) 24h/24 : vitre cassée, double vitrage, miroirs, parois de douche, fenêtres. Devis immédiat au {TEL}."
+    h = tete(titre, desc, chemin, ld)
+    h += '<div class="wrap">' + fil(ariane) + '</div>'
+    h += hero(f"Vitrier · Miroitier · Serrurier · {d['nom']} ({d['num']})", f"Vitrier {d['de']} ({d['num']}), 24h/24",
+              f"Vitre cassée, double vitrage, miroir ou fenêtre qui ferme mal {d['de']} ? Miroiterie Winter, artisan basé à Rosny-sous-Bois, intervient avec un devis immédiat.")
+    liens = ('<a href="/">Vitrier Rosny-sous-Bois</a>' if d["num"] == "93" else '') + "".join(f'<a href="/{o["slug"]}/">Vitrier {e(o["nom"])}</a>' for o in villes)
+    h += f'''<section><div class="wrap">
+  <div class="deux"><div class="bloc"><h2>Votre vitrier {e(d["de"])}</h2><p>{e(d["texte"])}</p>
+  <p>Urgence vitre cassée 24h/24, remplacement de vitrage, miroirs sur mesure, crédences, parois de douche, verrières, fenêtres, volets roulants et réglage de crémones.</p></div>
+  <div class="bloc"><h2>Nos villes {e(d["de"])}</h2><div class="villes">{liens}</div>
+  <p>Et aussi : {e(", ".join(d["autres"]))}, et toutes les autres communes du {d["num"]}.</p></div></div>
+</div></section>
+{bloc_avis()}
+{bloc_faq(faq, f"Vitrier {d['de']} : vos questions")}
+<section class="fond"><div class="wrap"><div><p class="eyebrow">Île-de-France</p><h2>Nos autres départements</h2></div><div class="villes"><a href="/vitrier-paris/">Vitrier Paris (75)</a>{"".join(f'<a href="/{o["slug"]}/">Vitrier {e(o["nom"])} ({o["num"]})</a>' for o in DEPARTEMENTS if o is not d)}</div></div></section>
+'''
+    h += pied()
+    ecrire(chemin, h); PAGES.append((chemin, "0.8"))
+
 def bloc_arrondissements(v):
     liens = "".join(f'<a href="/{o["slug"]}/">Vitrier {e(o["nom"])}</a>' for o in ARRONDISSEMENTS if o is not v)
     retour = '' if v["slug"] == "vitrier-paris" else '<a href="/vitrier-paris/">Vitrier Paris</a><a href="/">Vitrier Rosny-sous-Bois</a>'
@@ -483,11 +530,15 @@ def page_ville(v):
     chemin = f'/{v["slug"]}/'
     n = v["nom"]
     an = v.get("a", "à " + n)  # « au Raincy », « au Perreux-sur-Marne »
+    if "theme" in v:
+        det, (qq, qr) = THEMES[v["theme"]]
+        v = {**v, "detail": det, "q": (qq.format(an=an), qr)}
+    dep = DEP.get(v.get("dep"))
     faq = [(f"Intervenez-vous en urgence {an} ?", f"Oui. Nous intervenons 24h/24 et 7j/7 {an} ({v['cp']}) pour sécuriser une vitre cassée et remplacer le vitrage, souvent le jour même quand c'est possible."),
            v["q"],
            (f"Comment obtenir un devis {an} ?", f"Appelez le {TEL} ou envoyez une photo par SMS : nous vous donnons un devis immédiat.")]
     loc = dict(ENTREPRISE); loc = {**ENTREPRISE, "areaServed":[{"@type":"City","name":n}] + [a for a in ENTREPRISE["areaServed"] if a["name"] != n]}
-    ariane = [("Accueil","/")] + ([("Vitrier Paris","/vitrier-paris/")] if v.get("parent") else []) + [(f"Vitrier {n}",chemin)]
+    ariane = [("Accueil","/")] + ([("Vitrier Paris","/vitrier-paris/")] if v.get("parent") else []) + ([(f"Vitrier {dep['nom']}", f"/{dep['slug']}/")] if dep else []) + [(f"Vitrier {n}",chemin)]
     ld = [loc, fil_ld(ariane), faq_ld(faq)]
     titre = f"Vitrier {n} ({v['cp']}) 24h/24 | Miroiterie Winter"
     if len(titre) > 60: titre = f"Vitrier {n} ({v['cp']}) | Miroiterie Winter"
@@ -512,7 +563,7 @@ def page_ville(v):
 {bloc_avis()}
 {bloc_faq(faq, f"Vitrier {an} : vos questions")}
 {bloc_arrondissements(v) if v["slug"] == "vitrier-paris" or v.get("parent") else ""}
-{"" if v.get("parent") else f'''<section class="fond"><div class="wrap"><div><p class="eyebrow">Autres villes</p><h2>Nous intervenons aussi à</h2></div><div class="villes"><a href="/">Vitrier Rosny-sous-Bois</a>{"".join(f'<a href="/{o["slug"]}/">Vitrier {e(o["nom"])}</a>' for o in VILLES if o is not v and o["slug"] in VILLES_ACTIVES)}</div></div></section>'''}
+{"" if v.get("parent") else bloc_autres_villes(v, dep)}
 '''
     h += pied()
     ecrire(chemin, h); PAGES.append((chemin, "0.8"))
@@ -562,6 +613,8 @@ for v in VILLES:
     if v["slug"] in VILLES_ACTIVES: page_ville(v)
 for v in ARRONDISSEMENTS:
     page_ville(v)
+for d in DEPARTEMENTS:
+    page_departement(d)
 page_mentions()
 page_404()
 
