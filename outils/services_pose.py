@@ -45,6 +45,11 @@ SERVICES_POSE = {
     h1="Miroiterie et miroirs sur mesure",
     lead="Miroirs découpés à vos mesures, façonnés et posés chez vous : salle de bain, entrée, dressing, mur entier. Crédences en verre laqué pour la cuisine. Devis immédiat.",
     image=None,
+    # Illustrations 3D (pas des photos de chantier), demande du 24/11/2026
+    galerie=[("illustration-miroir-rond","Illustration : miroir rond au-dessus d'un meuble de salle de bain"),
+             ("illustration-miroir-ovale","Illustration : miroir ovale au-dessus d'une console dans une entrée"),
+             ("illustration-miroir-mur","Illustration : mur de miroirs derrière un canapé dans un salon"),
+             ("illustration-miroir-credence","Illustration : crédence en verre laqué bleu-vert dans une cuisine")],
     blocs=[
       ("Ce que nous posons",["Miroirs de salle de bain, d'entrée ou de dressing","Miroirs muraux grande taille et murs de miroirs","Miroirs ronds, ovales ou de forme, bords façonnés","Remplacement d'un miroir cassé ou piqué","Crédences de cuisine en verre laqué"]),
       ("Comment ça se passe",["Vous nous appelez ou envoyez une photo du mur : devis immédiat","Nous venons prendre les mesures exactes","Le miroir est découpé et façonné à vos mesures","Pose collée ou fixée selon le mur, bien d'aplomb","Nous laissons la pièce propre"]),
