@@ -417,18 +417,6 @@ def hero(eyebrow, h1, lead, facts=True):
 </div></div>
 '''
 
-def img_illu(nom, alt):
-    return f'<img src="/images/{nom}.jpg" alt="{e(alt)}" width="1200" height="900" loading="lazy" decoding="async">'
-
-def galerie_illus(S, une=None):
-    g = S.get("galerie") or []
-    if une is not None and g:
-        nom, alt = g[une % len(g)]
-        return f'<figure class="visuel">{img_illu(nom, alt)}<figcaption>Illustration</figcaption></figure>'
-    if not g: return ""
-    cartes = "".join(f'<figure class="visuel">{img_illu(n, a)}<figcaption>{e(a.replace("Illustration : ", "").capitalize())}</figcaption></figure>' for n, a in g)
-    return f'<section class="fond"><div class="wrap"><div><p class="eyebrow">Idées</p><h2>Quelques idées de miroirs</h2><p>Illustrations pour vous aider à imaginer votre projet.</p></div><div class="galerie deux-col">{cartes}</div></div></section>'
-
 def img(nom, alt, lazy=True):
     return f'<img src="/images/{nom}.jpg" alt="{e(alt)}" width="800" height="1000"{" loading=\"lazy\"" if lazy else ""} decoding="async">'
 
@@ -523,7 +511,6 @@ def page_pose(key):
     villes = "".join(f'<a href="/{S["slug"]}/{vs}/">{e(S["court"])} {e(n)}</a>' for vs,n,_c,_a,_f,_v,_l in VILLES_POSE)
     deps = "".join(f'<a href="/{d["slug"]}/">{e(d["nom"])} ({d["num"]})</a>' for d in DEPARTEMENTS)
     h += f'''<section><div class="wrap"><div class="blocs deux">{blocs}{image}</div></div></section>
-{galerie_illus(S)}
 <section class="fond"><div class="wrap"><div><p class="eyebrow">Près de chez vous</p><h2>{e(S["court"])} dans votre ville</h2></div><div class="villes">{villes}</div>
 <p>Nous intervenons aussi dans toute l'Île-de-France :</p><div class="villes">{deps}</div>
 {liens_autres_services(key)}</div></section>
@@ -556,7 +543,7 @@ def page_pose_ville(key, vv):
     etapes = "".join(f"<li>{e(x)}</li>" for x in S["blocs"][1][1])
     autres = "".join(f'<a href="/{S["slug"]}/{o[0]}/">{e(S["court"])} {e(o[1])}</a>' for o in VILLES_POSE if o[0] != vs)
     h += f'''<section><div class="wrap"><div class="deux">
-  <div class="bloc"><h2>{e(S["court"])} {e(an)}</h2><p>{e(texte)}</p><ul>{liste}</ul>{galerie_illus(S, [o[0] for o in VILLES_POSE].index(vs))}</div>
+  <div class="bloc"><h2>{e(S["court"])} {e(an)}</h2><p>{e(texte)}</p><ul>{liste}</ul></div>
   <div class="bloc"><h2>Comment ça se passe</h2><ol>{etapes}</ol>
   {liens_autres_services(key, vs, an)}
   <p><a class="lien-fort" href="{lien_vitrier}">Vitrier {e(an)} : vitre cassée, miroirs, parois de douche →</a></p></div>
@@ -666,7 +653,7 @@ def page_realisations():
     h += '<div class="wrap">' + fil([("Accueil","/"),("Réalisations",chemin)]) + '</div>'
     h += hero("Nos chantiers", "Réalisations avant / après", "Quelques chantiers récents en Île-de-France. Suivez-nous sur Instagram pour voir les nouveaux.", facts=False)
     cartes = "".join(f'<figure class="real">{img(f, "Avant / après : " + t)}<figcaption><b>{e(t)}</b><span>{e(d)}</span></figcaption></figure>' for f,t,d in REALISATIONS)
-    h += f'<section><div class="wrap"><div class="galerie deux-col">{cartes}</div><p><a class="lien-fort" href="{INSTAGRAM}" rel="noopener" target="_blank">Plus de réalisations sur Instagram →</a></p></div></section>'
+    h += f'<section><div class="wrap"><div class="galerie">{cartes}</div><p><a class="lien-fort" href="{INSTAGRAM}" rel="noopener" target="_blank">Plus de réalisations sur Instagram →</a></p></div></section>'
     h += pied()
     ecrire(chemin, h); PAGES.append((chemin, "0.7"))
 

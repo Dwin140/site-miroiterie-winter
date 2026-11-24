@@ -83,9 +83,6 @@ section.fond{background:var(--surface)}
 .bloc a{color:var(--navy);font-weight:600}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bloc a{color:#9fb8e6}}
 .visuel{margin:0}
-.visuel figcaption{color:var(--muted);font-size:.9rem;margin-top:8px}
-.bloc .visuel{margin-top:18px}
-@media (min-width:760px){.galerie.deux-col{grid-template-columns:1fr 1fr;max-width:900px}}
 .liste-atouts{list-style:none;padding:0;gap:12px}
 .liste-atouts li{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--orange);border-radius:8px;padding:12px 14px}
 .villes{display:flex;flex-wrap:wrap;gap:10px}
