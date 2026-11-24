@@ -4,7 +4,7 @@ Usage : python3 generer_site.py <dossier_du_depot>
 """
 import json, os, sys, html
 from departements import DEPARTEMENTS, DEP_EXISTANTES, THEMES, NOUVELLES_VILLES
-from services_pose import SERVICES_POSE, VILLES_POSE
+from services_pose import SERVICES_POSE, VILLES_POSE, TEXTES_MIROIR
 
 OUT = sys.argv[1]
 DOMAINE = "https://miroiterie-winter.fr"
@@ -365,7 +365,7 @@ def pied():
     <div><p class="ftitre">Miroiterie Winter</p><p>Vitrier, miroitier et serrurier à Rosny-sous-Bois (93), intervention 24h/24 dans toute l'Île-de-France.</p>
       <p class="reseaux"><a href="{INSTAGRAM}" rel="noopener" target="_blank" aria-label="Instagram Miroiterie Winter">{ICON_IG}<span>Instagram</span></a><a href="{MAPS}" rel="noopener" target="_blank" aria-label="Miroiterie Winter sur Google Maps">{ICON_MAP}<span>Google Maps</span></a></p>
       <p><a class="lien-avis" href="{AVIS}" rel="noopener" target="_blank">★ Laisser un avis Google</a></p></div>
-    <div><p class="ftitre">Sur le site</p><ul><li><a href="/#services">Nos services</a></li><li><a href="/#realisations">Nos réalisations</a></li><li><a href="/pose-de-fenetres/">Pose de fenêtres</a></li><li><a href="/pose-de-volets-roulants/">Pose de volets roulants</a></li><li><a href="/#avis">Avis clients</a></li><li><a href="/#zone">Zone d'intervention</a></li><li><a href="/#faq">Questions fréquentes</a></li><li><a href="/#contact">Contact et devis</a></li></ul></div>
+    <div><p class="ftitre">Sur le site</p><ul><li><a href="/#services">Nos services</a></li><li><a href="/#realisations">Nos réalisations</a></li><li><a href="/pose-de-fenetres/">Pose de fenêtres</a></li><li><a href="/pose-de-volets-roulants/">Pose de volets roulants</a></li><li><a href="/miroir-sur-mesure/">Miroir sur mesure</a></li><li><a href="/#avis">Avis clients</a></li><li><a href="/#zone">Zone d'intervention</a></li><li><a href="/#faq">Questions fréquentes</a></li><li><a href="/#contact">Contact et devis</a></li></ul></div>
     <div><p class="ftitre">Villes</p><ul class="villes-pied"><li><a href="/">Vitrier Rosny-sous-Bois</a></li>{"".join(f'<li><a href="/{v["slug"]}/">Vitrier {e(v["nom"])}</a></li>' for v in VILLES if v["slug"] in VILLES_PIED)}</ul></div>
     <div><p class="ftitre">Départements</p><ul><li><a href="/vitrier-paris/">Vitrier Paris (75)</a></li>{"".join(f'<li><a href="/{d["slug"]}/">Vitrier {e(d["nom"])} ({d["num"]})</a></li>' for d in DEPARTEMENTS)}</ul></div>
   </div>
@@ -389,7 +389,7 @@ def cartes_services():
     out = []
     for t, d, urgent in SERVICES_ACCUEIL:
         cls = ' class="urgent"' if urgent else ""
-        lien = {"Fenêtres et portes-fenêtres": "/pose-de-fenetres/", "Volets roulants": "/pose-de-volets-roulants/"}.get(t)
+        lien = {"Fenêtres et portes-fenêtres": "/pose-de-fenetres/", "Volets roulants": "/pose-de-volets-roulants/", "Miroirs sur mesure": "/miroir-sur-mesure/", "Crédences en verre": "/miroir-sur-mesure/"}.get(t)
         plus = f'<a class="plus" href="{lien}">En savoir plus →</a>' if lien else ""
         out.append(f'<div{cls}><h3>{e(t)}</h3><p>{e(d)}</p>{plus}</div>')
     return '<div class="services">' + "".join(out) + '</div>'
@@ -416,6 +416,18 @@ def hero(eyebrow, h1, lead, facts=True):
   {f}
 </div></div>
 '''
+
+def img_illu(nom, alt):
+    return f'<img src="/images/{nom}.jpg" alt="{e(alt)}" width="1200" height="900" loading="lazy" decoding="async">'
+
+def galerie_illus(S, une=None):
+    g = S.get("galerie") or []
+    if une is not None and g:
+        nom, alt = g[une % len(g)]
+        return f'<figure class="visuel">{img_illu(nom, alt)}<figcaption>Illustration</figcaption></figure>'
+    if not g: return ""
+    cartes = "".join(f'<figure class="visuel">{img_illu(n, a)}<figcaption>{e(a.replace("Illustration : ", "").capitalize())}</figcaption></figure>' for n, a in g)
+    return f'<section class="fond"><div class="wrap"><div><p class="eyebrow">Idées</p><h2>Quelques idées de miroirs</h2><p>Illustrations pour vous aider à imaginer votre projet.</p></div><div class="galerie deux-col">{cartes}</div></div></section>'
 
 def img(nom, alt, lazy=True):
     return f'<img src="/images/{nom}.jpg" alt="{e(alt)}" width="800" height="1000"{" loading=\"lazy\"" if lazy else ""} decoding="async">'
@@ -487,15 +499,18 @@ POSE_PAR_VITRIER = {lien: slug for slug, _n, _c, _a, _f, _v, lien in VILLES_POSE
 
 def bloc_pose(slug_vitrier, an):
     vs = POSE_PAR_VITRIER.get("/" + slug_vitrier + "/") if slug_vitrier else None
-    lf = f"/pose-de-fenetres/{vs}/" if vs else "/pose-de-fenetres/"
-    lv = f"/pose-de-volets-roulants/{vs}/" if vs else "/pose-de-volets-roulants/"
+    lien = lambda k: f'/{SERVICES_POSE[k]["slug"]}/{vs}/' if vs else f'/{SERVICES_POSE[k]["slug"]}/'
     return f'''<section><div class="wrap"><div class="deux">
-  <div class="bloc"><h2>Pose de fenêtres {e(an)}</h2><p>Fenêtres, portes-fenêtres et baies en PVC ou en aluminium, double vitrage, fabriquées à vos mesures et posées. Une seule fenêtre ou tout le logement.</p><p><a class="lien-fort" href="{lf}">Pose de fenêtres {e(an)} →</a></p></div>
-  <div class="bloc"><h2>Pose de volets roulants {e(an)}</h2><p>Volets roulants manuels, électriques ou solaires, sur fenêtres neuves ou existantes, fabriqués sur mesure.</p><p><a class="lien-fort" href="{lv}">Pose de volets roulants {e(an)} →</a></p></div>
+  <div class="bloc"><h2>Pose de fenêtres {e(an)}</h2><p>Fenêtres, portes-fenêtres et baies en PVC ou en aluminium, double vitrage, fabriquées à vos mesures et posées. Une seule fenêtre ou tout le logement.</p><p><a class="lien-fort" href="{lien("fenetres")}">Pose de fenêtres {e(an)} →</a></p></div>
+  <div class="bloc"><h2>Pose de volets roulants {e(an)}</h2><p>Volets roulants manuels, électriques ou solaires, sur fenêtres neuves ou existantes, fabriqués sur mesure.</p><p><a class="lien-fort" href="{lien("volets")}">Pose de volets roulants {e(an)} →</a></p></div>
+  <div class="bloc"><h2>Miroir sur mesure {e(an)}</h2><p>Miroirs ronds, ovales ou rectangulaires, murs de miroirs et crédences en verre, découpés à vos mesures et posés.</p><p><a class="lien-fort" href="{lien("miroirs")}">Miroir sur mesure {e(an)} →</a></p></div>
 </div></div></section>'''
 
+def liens_autres_services(key, vs=None, an=None):
+    return "".join(f'<p><a class="lien-fort" href="/{o["slug"]}/{vs + "/" if vs else ""}">{"Voir aussi : " if not vs else ""}{e(o["court"])}{" " + e(an) if an else ""} →</a></p>' for k2, o in SERVICES_POSE.items() if k2 != key)
+
 def page_pose(key):
-    S = SERVICES_POSE[key]; autre = SERVICES_POSE["volets" if key == "fenetres" else "fenetres"]
+    S = SERVICES_POSE[key]
     chemin = f'/{S["slug"]}/'
     ariane = [("Accueil","/"),(S["court"],chemin)]
     svc = {"@context":"https://schema.org","@type":"Service","name":S["h1"],"description":S["desc"],"provider":{"@id":DOMAINE+"/#entreprise"},"areaServed":[{"@type":"AdministrativeArea","name":"Île-de-France"}],"url":DOMAINE+chemin}
@@ -508,9 +523,10 @@ def page_pose(key):
     villes = "".join(f'<a href="/{S["slug"]}/{vs}/">{e(S["court"])} {e(n)}</a>' for vs,n,_c,_a,_f,_v,_l in VILLES_POSE)
     deps = "".join(f'<a href="/{d["slug"]}/">{e(d["nom"])} ({d["num"]})</a>' for d in DEPARTEMENTS)
     h += f'''<section><div class="wrap"><div class="blocs deux">{blocs}{image}</div></div></section>
+{galerie_illus(S)}
 <section class="fond"><div class="wrap"><div><p class="eyebrow">Près de chez vous</p><h2>{e(S["court"])} dans votre ville</h2></div><div class="villes">{villes}</div>
 <p>Nous intervenons aussi dans toute l'Île-de-France :</p><div class="villes">{deps}</div>
-<p><a class="lien-fort" href="/{autre["slug"]}/">Voir aussi : {e(autre["court"])} →</a></p></div></section>
+{liens_autres_services(key)}</div></section>
 {bloc_avis()}
 {bloc_faq(S["faq"], S["court"] + " : vos questions")}
 '''
@@ -518,9 +534,9 @@ def page_pose(key):
     ecrire(chemin, h); PAGES.append((chemin, "0.9"))
 
 def page_pose_ville(key, vv):
-    S = SERVICES_POSE[key]; autre = SERVICES_POSE["volets" if key == "fenetres" else "fenetres"]
+    S = SERVICES_POSE[key]
     vs, n, cp, an, tf, tv, lien_vitrier = vv
-    texte = tf if key == "fenetres" else tv
+    texte = {"fenetres": tf, "volets": tv, "miroirs": TEXTES_MIROIR[vs]}[key]
     chemin = f'/{S["slug"]}/{vs}/'
     ariane = [("Accueil","/"),(S["court"],f'/{S["slug"]}/'),(f'{S["court"]} {n}',chemin)]
     faq = [(f"Comment obtenir un devis pour la {S['nom']} {an} ?", f"Appelez le {TEL} ou envoyez une photo par SMS : nous vous donnons un devis immédiat, puis nous venons prendre les mesures."),
@@ -531,7 +547,7 @@ def page_pose_ville(key, vv):
     titre = f'{S["court"]} {an} ({cp}) | Miroiterie Winter'
     if len(titre) > 60: titre = f'{S["court"]} {n} | Miroiterie Winter'
     if len(titre) > 60: titre = f'{S["court"]} {n} | M. Winter'
-    quoi = "fenêtres et portes-fenêtres PVC ou alu, double vitrage, sur mesure" if key == "fenetres" else "volets roulants manuels, électriques ou solaires, sur mesure"
+    quoi = {"fenetres": "fenêtres et portes-fenêtres PVC ou alu, double vitrage, sur mesure", "volets": "volets roulants manuels, électriques ou solaires, sur mesure", "miroirs": "miroirs ronds, ovales ou rectangulaires et crédences, posés"}[key]
     desc = f'{S["court"]} {an} ({cp}) : {quoi}. Devis immédiat au {TEL}.'
     h = tete(titre, desc, chemin, ld)
     h += '<div class="wrap">' + fil(ariane) + '</div>'
@@ -540,9 +556,9 @@ def page_pose_ville(key, vv):
     etapes = "".join(f"<li>{e(x)}</li>" for x in S["blocs"][1][1])
     autres = "".join(f'<a href="/{S["slug"]}/{o[0]}/">{e(S["court"])} {e(o[1])}</a>' for o in VILLES_POSE if o[0] != vs)
     h += f'''<section><div class="wrap"><div class="deux">
-  <div class="bloc"><h2>{e(S["court"])} {e(an)}</h2><p>{e(texte)}</p><ul>{liste}</ul></div>
+  <div class="bloc"><h2>{e(S["court"])} {e(an)}</h2><p>{e(texte)}</p><ul>{liste}</ul>{galerie_illus(S, [o[0] for o in VILLES_POSE].index(vs))}</div>
   <div class="bloc"><h2>Comment ça se passe</h2><ol>{etapes}</ol>
-  <p><a class="lien-fort" href="/{autre["slug"]}/{vs}/">{e(autre["court"])} {e(an)} →</a></p>
+  {liens_autres_services(key, vs, an)}
   <p><a class="lien-fort" href="{lien_vitrier}">Vitrier {e(an)} : vitre cassée, miroirs, parois de douche →</a></p></div>
 </div></div></section>
 {bloc_avis()}
@@ -650,7 +666,7 @@ def page_realisations():
     h += '<div class="wrap">' + fil([("Accueil","/"),("Réalisations",chemin)]) + '</div>'
     h += hero("Nos chantiers", "Réalisations avant / après", "Quelques chantiers récents en Île-de-France. Suivez-nous sur Instagram pour voir les nouveaux.", facts=False)
     cartes = "".join(f'<figure class="real">{img(f, "Avant / après : " + t)}<figcaption><b>{e(t)}</b><span>{e(d)}</span></figcaption></figure>' for f,t,d in REALISATIONS)
-    h += f'<section><div class="wrap"><div class="galerie">{cartes}</div><p><a class="lien-fort" href="{INSTAGRAM}" rel="noopener" target="_blank">Plus de réalisations sur Instagram →</a></p></div></section>'
+    h += f'<section><div class="wrap"><div class="galerie deux-col">{cartes}</div><p><a class="lien-fort" href="{INSTAGRAM}" rel="noopener" target="_blank">Plus de réalisations sur Instagram →</a></p></div></section>'
     h += pied()
     ecrire(chemin, h); PAGES.append((chemin, "0.7"))
 
