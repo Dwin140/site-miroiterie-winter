@@ -12,7 +12,7 @@ TEL = "07 83 38 68 24"
 TEL_LIEN = "tel:+33783386824"
 MAIL = "miroiterie.winter@gmail.com"
 ADRESSE = "141 rue du Général Leclerc, 93110 Rosny-sous-Bois"
-NOTE, NB_AVIS = "4,9", 60
+NOTE, NB_AVIS = "4,9", 61
 INSTAGRAM = "https://www.instagram.com/miroiterie_winter/"
 MAPS = "https://maps.google.com/maps?cid=10857902701694603854"
 AVIS = "https://search.google.com/local/writereview?placeid=ChIJ51-lGxwT5kcRTtJCxPoEr5Y"
@@ -266,8 +266,8 @@ REALISATIONS = [
 ]
 
 AVIS_CLIENTS = [  # (texte, prénom, mois) : avis Google 5 étoiles, prénom seulement
+  ("J'ai fait appel à la Miroiterie Winter pour la réparation d'un volet roulant. Je suis très satisfaite. Professionnel sérieux et réactif, je recommande !","Audrey","novembre 2026"),
   ("Pose de deux portes-fenêtres et de volets solaires. Merci pour votre travail.","Jose","novembre 2026"),
-  ("Remplacement de 4 doubles vitrages. Merci pour votre intervention.","Ti Goût Lakay","novembre 2026"),
   ("L'installation de ma fenêtre s'est très bien passée. Intervention rapide, efficace et soignée, avec un vrai professionnalisme. Le résultat est nickel !","Melinda","novembre 2026"),
   ("Dépannage d'urgence sur une porte-fenêtre bloquée en position ouverte : il est venu de nuit ! Hyper réactif et très professionnel.","Sarah","octobre 2026"),
 ]
