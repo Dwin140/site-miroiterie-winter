@@ -18,7 +18,7 @@ Il n'est pas développeur : réponses courtes, simples, sans jargon. Toujours fi
 - Téléphone : 07 83 38 68 24 (lien `tel:+33783386824`)
 - E-mail : miroiterie.winter@gmail.com
 - Adresse : 141 rue du Général Leclerc, 93110 Rosny-sous-Bois (jamais l'étage, l'escalier ni l'appartement)
-- Note Google : 4,9 ★, 60 avis (au 22/11/2026). Dwinter a choisi une mise à jour chaque semaine : lire la fiche Google (Windsor.ai), proposer le changement en pull request et lui donner le lien d aperçu.
+- Note Google : 4,9 ★, 61 avis (au 24/11/2026). Dwinter a choisi une mise à jour chaque semaine : lire la fiche Google (Windsor.ai), proposer le changement en pull request et lui donner le lien d aperçu.
 
 ## Interdits
 - Ne JAMAIS mettre d'IBAN, de coordonnées bancaires, de SIRET privé ou de prix de chantier sur le site.
