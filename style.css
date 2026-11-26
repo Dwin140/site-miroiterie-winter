@@ -163,3 +163,9 @@ footer .legal{margin-top:24px;font-size:.85rem}
 
 /* Les ancres du menu ne passent pas sous l en-tête fixe */
 [id]{scroll-margin-top:110px}
+/* vidéos de chantier */
+.videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,300px));gap:20px;justify-content:center}
+.video{margin:0;display:grid;gap:10px}
+.video video{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:12px;background:#000;display:block}
+.video figcaption{display:grid;gap:4px}
+.video figcaption span{color:var(--muted,#5b6472)}
