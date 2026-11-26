@@ -420,7 +420,9 @@ def hero(eyebrow, h1, lead, facts=True):
 # Vidéos de chantier (fichiers dans /videos/ : .mp4 H.264 720p sans son + image .jpg du même nom)
 # pages : "accueil" et/ou les clés de SERVICES_POSE ("fenetres", "volets", "miroirs")
 VIDEOS = [
-  ("chantier-fenetres-volet-roulant", "Fenêtres PVC et volet roulant", "Fenêtres PVC blanc oscillo-battantes avec volet roulant : ouverture à la française et en soufflet.", ("accueil","fenetres","volets")),
+  ("avant-apres-volets-roulants", "Avant / après : volets roulants électriques",
+   "Avant : deux volets roulants à projection à l'italienne, en panne depuis longtemps. Le client a choisi de les remplacer. Après : deux volets roulants électriques neufs, qui montent et descendent d'un simple bouton.",
+   ("accueil","volets")),
 ]
 
 def bloc_videos(page, fond=False):
@@ -564,7 +566,7 @@ def page_pose_ville(key, vv):
   {liens_autres_services(key, vs, an)}
   <p><a class="lien-fort" href="{lien_vitrier}">Vitrier {e(an)} : vitre cassée, miroirs, parois de douche →</a></p></div>
 </div></div></section>
-{bloc_avis()}
+{bloc_videos(key, fond=True)}{bloc_avis()}
 {bloc_faq(faq, f'{S["court"]} {an} : vos questions')}
 <section class="fond"><div class="wrap"><div><p class="eyebrow">Autres villes</p><h2>{e(S["court"])} près de chez vous</h2></div><div class="villes"><a href="/{S["slug"]}/">{e(S["court"])} en Île-de-France</a>{autres}</div></div></section>
 '''
