@@ -72,6 +72,29 @@ section.fond{background:var(--surface)}
 .lien-fort{color:var(--orange);font-weight:700;text-decoration:none}
 .lien-fort:hover{text-decoration:underline}
 
+/* Carrousel des réalisations */
+.tete-carrousel{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.fleches{display:none;gap:10px;flex:none}
+.fleche{width:48px;height:48px;border-radius:50%;border:2px solid var(--navy);background:var(--surface);color:var(--navy);font-size:1.4rem;line-height:1;cursor:pointer;display:grid;place-items:center}
+.fleche:hover{background:var(--navy);color:#fff}
+.fleche:disabled{opacity:.35;cursor:default;background:var(--surface);color:var(--navy)}
+.fleche:focus-visible,.points button:focus-visible,.piste:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.carrousel{display:grid;gap:14px;min-width:0}
+.piste{display:grid;grid-auto-flow:column;grid-auto-columns:84%;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;scrollbar-width:none;padding-bottom:4px;border-radius:12px}
+.piste::-webkit-scrollbar{display:none}
+.slide{margin:0;scroll-snap-align:start;display:grid;gap:10px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 10px 14px}
+.slide img{width:100%;border-radius:10px;display:block;aspect-ratio:4/5;object-fit:cover}
+.slide figcaption{display:grid;gap:2px;padding:0 4px}
+.slide figcaption b{font-family:var(--display);color:var(--navy);font-size:1.1rem}
+.slide figcaption span{color:var(--muted);font-size:.95rem}
+.points{display:flex;justify-content:center;gap:8px}
+.points button{width:10px;height:10px;padding:0;border-radius:50%;border:0;background:var(--line);cursor:pointer}
+.points button[aria-current="true"]{background:var(--orange);width:26px;border-radius:5px}
+@media (min-width:760px){.piste{grid-auto-columns:calc((100% - 32px)/3)}.fleches{display:flex}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .slide figcaption b{color:#fff}}
+:root[data-theme="dark"] .slide figcaption b{color:#fff}
+@media (prefers-reduced-motion: reduce){.piste{scroll-behavior:auto}}
+
 /* Pages service et ville */
 .deux{display:grid;gap:28px}
 @media (min-width:760px){.deux{grid-template-columns:1fr 1fr}.deux.avec-image{grid-template-columns:1.3fr 1fr;align-items:start}}
