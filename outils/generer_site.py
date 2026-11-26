@@ -417,6 +417,22 @@ def hero(eyebrow, h1, lead, facts=True):
 </div></div>
 '''
 
+# Vidéos de chantier (fichiers dans /videos/ : .mp4 H.264 720p sans son + image .jpg du même nom)
+# pages : "accueil" et/ou les clés de SERVICES_POSE ("fenetres", "volets", "miroirs")
+VIDEOS = [
+  ("chantier-fenetres-volet-roulant", "Fenêtres PVC et volet roulant", "Fenêtres PVC blanc oscillo-battantes avec volet roulant : ouverture à la française et en soufflet.", ("accueil","fenetres","volets")),
+]
+
+def bloc_videos(page, fond=False):
+    vids = [v for v in VIDEOS if page in v[3]]
+    if not vids: return ""
+    cartes = "".join(f'''<figure class="video"><video src="/videos/{f}.mp4" poster="/videos/{f}.jpg" width="720" height="1280" controls muted playsinline preload="none" aria-label="{e(t)}"></video><figcaption><b>{e(t)}</b><span>{e(d)}</span></figcaption></figure>''' for f,t,d,_ in vids)
+    return f'''<section{' class="fond"' if fond else ''}><div class="wrap">
+  <div><p class="eyebrow">En vidéo</p><h2>Nos chantiers en vidéo</h2></div>
+  <div class="videos">{cartes}</div>
+</div></section>
+'''
+
 def img(nom, alt, lazy=True):
     return f'<img src="/images/{nom}.jpg" alt="{e(alt)}" width="800" height="1000"{" loading=\"lazy\"" if lazy else ""} decoding="async">'
 
@@ -448,7 +464,7 @@ def page_accueil():
     </div>
   </div>
 </div></section>
-<section><div class="wrap atouts">
+{bloc_videos("accueil")}<section><div class="wrap atouts">
   <div><p class="eyebrow">Pourquoi nous appeler</p><h2>Un artisan local, joignable à toute heure</h2></div>
   <ul class="liste-atouts">
     <li><b>Basés à Rosny-sous-Bois</b> : nous connaissons le secteur et arrivons vite dans l'est parisien.</li>
@@ -511,7 +527,7 @@ def page_pose(key):
     villes = "".join(f'<a href="/{S["slug"]}/{vs}/">{e(S["court"])} {e(n)}</a>' for vs,n,_c,_a,_f,_v,_l in VILLES_POSE)
     deps = "".join(f'<a href="/{d["slug"]}/">{e(d["nom"])} ({d["num"]})</a>' for d in DEPARTEMENTS)
     h += f'''<section><div class="wrap"><div class="blocs deux">{blocs}{image}</div></div></section>
-<section class="fond"><div class="wrap"><div><p class="eyebrow">Près de chez vous</p><h2>{e(S["court"])} dans votre ville</h2></div><div class="villes">{villes}</div>
+{bloc_videos(key)}<section class="fond"><div class="wrap"><div><p class="eyebrow">Près de chez vous</p><h2>{e(S["court"])} dans votre ville</h2></div><div class="villes">{villes}</div>
 <p>Nous intervenons aussi dans toute l'Île-de-France :</p><div class="villes">{deps}</div>
 {liens_autres_services(key)}</div></section>
 {bloc_avis()}
