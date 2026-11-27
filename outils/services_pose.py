@@ -55,6 +55,26 @@ SERVICES_POSE = {
          ("Pouvez-vous remplacer un miroir cassé ?","Oui. Nous retirons l'ancien miroir et posons un miroir neuf aux mêmes dimensions, ou à de nouvelles mesures."),
          ("Comment obtenir un devis ?","Appelez le 07 83 38 68 24 ou envoyez une photo par SMS : nous vous donnons un devis immédiat, puis nous venons prendre les mesures.")],
   ),
+  "chatieres": dict(
+    slug="pose-de-chatiere", court="Pose de chatière", nom="pose de chatière dans une vitre",
+    titre="Pose de chatière sur vitre et double vitrage | M. Winter",
+    desc="Pose de chatière dans une fenêtre, une porte-fenêtre ou une baie, en simple ou double vitrage, sans changer la fenêtre. Île-de-France. Devis au 07 83 38 68 24.",
+    h1="Pose de chatière dans une vitre",
+    lead="Votre chat entre et sort seul, et vous gardez votre fenêtre. Nous refaisons le vitrage, simple ou double, percé au diamètre de la chatière, puis nous posons la chatière. Devis immédiat.",
+    image=("avant-apres-chatiere","Avant / après : chatière posée dans le double vitrage d'une porte-fenêtre, sans changer la porte-fenêtre"),
+    galerie=[("chatiere-avant","Avant","La porte-fenêtre du client, sans passage pour le chat."),
+             ("chatiere-vitrage-perce","Le vitrage percé","Le nouveau vitrage est percé au diamètre de la chatière."),
+             ("chatiere-apres","Après","La chatière est posée. La porte-fenêtre s'ouvre et se ferme comme avant.")],
+    blocs=[
+      ("Où poser une chatière",["Porte-fenêtre ou baie vitrée","Fenêtre de cuisine, de chambre ou de salle de bain","Porte vitrée d'entrée, de véranda ou de jardin","En simple vitrage comme en double vitrage","Chatière classique ou à puce électronique, selon votre choix"]),
+      ("Comment ça se passe",["Vous nous appelez ou envoyez une photo de la vitre : devis immédiat","Nous venons prendre les mesures de la vitre","Le vitrage est fabriqué avec le trou au diamètre de votre chatière","Nous retirons l'ancienne vitre et posons la nouvelle avec la chatière","Votre chat a sa porte, et la fenêtre reste en place"]),
+      ("Pourquoi passer par un vitrier",["En double vitrage, le vitrage est refait d'origine avec le trou : l'isolation est conservée","Pas besoin de changer la fenêtre, de découper la porte ni le mur","Un travail propre : le vitrage est fait aux bonnes mesures, la chatière bien d'aplomb"]),
+    ],
+    faq=[("Peut-on poser une chatière dans un double vitrage ?","Oui. Nous faisons fabriquer un double vitrage déjà percé au diamètre de la chatière, puis nous le posons dans votre fenêtre. L'isolation est conservée."),
+         ("Faut-il changer la fenêtre ou la porte-fenêtre ?","Non. La fenêtre reste en place : seul le vitrage est remplacé par un vitrage percé pour la chatière."),
+         ("Peut-on mettre une chatière dans une baie vitrée ou une fenêtre ?","Oui. La chatière se pose dans le vitrage d'une porte-fenêtre, d'une baie, d'une fenêtre basse ou d'une porte vitrée, à la bonne hauteur pour votre chat."),
+         ("Comment obtenir un devis ?","Appelez le 07 83 38 68 24 ou envoyez par SMS une photo de la vitre et le modèle de chatière : nous vous donnons un devis immédiat, puis nous venons prendre les mesures.")],
+  ),
 }
 
 # Pages ville × service : (slug ville, nom, cp, préposition, texte fenêtres, texte volets, lien page vitrier)
@@ -99,4 +119,26 @@ TEXTES_MIROIR = {
   "noisy-le-grand":"À Noisy-le-Grand, nous posons des miroirs pour les logements, les commerces et les salles de sport.",
   "bobigny":"À Bobigny, nous posons des miroirs sur mesure et remplaçons les miroirs cassés, en appartement comme dans les halls d'immeuble.",
   "paris":"À Paris, nous posons des miroirs sur mesure dans les appartements, surtout dans l'est parisien : miroir de cheminée, mur de miroirs, salle de bain.",
+}
+
+# Texte « pose de chatière » propre à chaque ville (demande du 27/11/2026 : mettre en avant les chatières)
+TEXTES_CHATIERE = {
+  "rosny-sous-bois":"À Rosny-sous-Bois, notre ville, nous posons des chatières dans les portes-fenêtres des pavillons comme dans les baies des appartements avec balcon.",
+  "montreuil":"À Montreuil, beaucoup de maisons ont un jardin ou une cour : une chatière dans la vitre de la porte du jardin laisse votre chat sortir sans laisser la porte ouverte.",
+  "noisy-le-sec":"À Noisy-le-Sec, voisine de Rosny-sous-Bois, nous posons des chatières en simple et en double vitrage, dans les maisons comme en appartement.",
+  "villemomble":"À Villemomble, ville de pavillons et de jardins, nous posons la chatière dans la porte-fenêtre qui donne sur le jardin, sans toucher au cadre.",
+  "bondy":"À Bondy, nous posons des chatières dans les fenêtres et portes-fenêtres PVC, avec un double vitrage refait au diamètre de la chatière.",
+  "bagnolet":"À Bagnolet, nous posons des chatières dans les baies qui donnent sur une terrasse ou un balcon, pour que votre chat sorte quand il veut.",
+  "fontenay-sous-bois":"À Fontenay-sous-Bois, nous posons des chatières dans les portes-fenêtres et les portes vitrées de véranda, en gardant vos menuiseries.",
+  "vincennes":"À Vincennes, une chatière dans la vitre d'une porte-fenêtre évite de découper une porte ancienne : le vitrage est refait, la menuiserie reste intacte.",
+  "romainville":"À Romainville, nous posons des chatières dans les logements neufs comme anciens, en double vitrage pour garder une bonne isolation.",
+  "gagny":"À Gagny, beaucoup de maisons ont un jardin : la chatière se pose dans la porte-fenêtre ou la fenêtre basse, à la bonne hauteur pour votre chat.",
+  "le-raincy":"Au Raincy, nous posons la chatière dans le vitrage sans toucher aux portes et fenêtres de style des maisons anciennes.",
+  "neuilly-plaisance":"À Neuilly-Plaisance, voisine de Rosny-sous-Bois, nous posons des chatières dans les fenêtres et baies, en simple comme en double vitrage.",
+  "neuilly-sur-marne":"À Neuilly-sur-Marne, nous posons des chatières dans les pavillons et les appartements avec terrasse, sans changer la fenêtre.",
+  "le-perreux-sur-marne":"Au Perreux-sur-Marne, nous posons des chatières dans les portes vitrées des maisons et des villas, côté jardin ou côté véranda.",
+  "nogent-sur-marne":"À Nogent-sur-Marne, nous prenons les mesures de la vitre chez vous, puis nous posons le vitrage percé et la chatière, proprement et sans changer la fenêtre.",
+  "noisy-le-grand":"À Noisy-le-Grand, nous posons des chatières dans les maisons, les appartements avec balcon et les vérandas.",
+  "bobigny":"À Bobigny, nous posons des chatières dans les fenêtres et portes-fenêtres PVC ou alu, en double vitrage pour ne pas perdre en isolation.",
+  "paris":"À Paris, beaucoup de chats vivent en appartement avec balcon ou terrasse : nous posons la chatière dans la vitre de la porte-fenêtre, surtout dans l'est parisien.",
 }

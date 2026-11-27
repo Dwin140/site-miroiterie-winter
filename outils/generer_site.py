@@ -4,7 +4,7 @@ Usage : python3 generer_site.py <dossier_du_depot>
 """
 import json, os, sys, html
 from departements import DEPARTEMENTS, DEP_EXISTANTES, THEMES, NOUVELLES_VILLES
-from services_pose import SERVICES_POSE, VILLES_POSE, TEXTES_MIROIR
+from services_pose import SERVICES_POSE, VILLES_POSE, TEXTES_MIROIR, TEXTES_CHATIERE
 
 OUT = sys.argv[1]
 DOMAINE = "https://miroiterie-winter.fr"
@@ -277,6 +277,7 @@ FAQ_ACCUEIL = [
   ("Dans quelles villes intervenez-vous ?","Nous sommes basés à Rosny-sous-Bois (93) et intervenons dans toute l'Île-de-France : Montreuil, Noisy-le-Sec, Villemomble, Bondy, Bagnolet, Fontenay-sous-Bois, Vincennes, Paris et bien d'autres."),
   ("Combien coûte un remplacement de vitre ?","Le prix dépend des dimensions, du type de verre et de l'accès. Envoyez-nous une photo par SMS : nous vous donnons un devis immédiat."),
   ("Travaillez-vous avec les assurances ?","Oui. Nous établissons un devis détaillé que vous transmettez à votre assureur en cas de bris de glace."),
+  ("Pouvez-vous poser une chatière dans une vitre ?","Oui. Nous posons des chatières dans les fenêtres, portes-fenêtres et baies, en simple ou double vitrage, sans changer la fenêtre : le vitrage est refait au diamètre de la chatière."),
   ("Travaillez-vous pour les professionnels ?","Oui : commerces, syndics, agences immobilières et architectes. Vitrines, miroirs et vitrages de locaux professionnels."),
 ]
 
@@ -365,7 +366,7 @@ def pied():
     <div><p class="ftitre">Miroiterie Winter</p><p>Vitrier, miroitier et serrurier à Rosny-sous-Bois (93), intervention 24h/24 dans toute l'Île-de-France.</p>
       <p class="reseaux"><a href="{INSTAGRAM}" rel="noopener" target="_blank" aria-label="Instagram Miroiterie Winter">{ICON_IG}<span>Instagram</span></a><a href="{MAPS}" rel="noopener" target="_blank" aria-label="Miroiterie Winter sur Google Maps">{ICON_MAP}<span>Google Maps</span></a></p>
       <p><a class="lien-avis" href="{AVIS}" rel="noopener" target="_blank">★ Laisser un avis Google</a></p></div>
-    <div><p class="ftitre">Sur le site</p><ul><li><a href="/#services">Nos services</a></li><li><a href="/pose-de-fenetres/">Pose de fenêtres</a></li><li><a href="/pose-de-volets-roulants/">Pose de volets roulants</a></li><li><a href="/miroir-sur-mesure/">Miroir sur mesure</a></li><li><a href="/#avis">Avis clients</a></li><li><a href="/#zone">Zone d'intervention</a></li><li><a href="/#faq">Questions fréquentes</a></li><li><a href="/#contact">Contact et devis</a></li></ul></div>
+    <div><p class="ftitre">Sur le site</p><ul><li><a href="/#services">Nos services</a></li><li><a href="/pose-de-fenetres/">Pose de fenêtres</a></li><li><a href="/pose-de-volets-roulants/">Pose de volets roulants</a></li><li><a href="/miroir-sur-mesure/">Miroir sur mesure</a></li><li><a href="/pose-de-chatiere/">Pose de chatière</a></li><li><a href="/#avis">Avis clients</a></li><li><a href="/#zone">Zone d'intervention</a></li><li><a href="/#faq">Questions fréquentes</a></li><li><a href="/#contact">Contact et devis</a></li></ul></div>
     <div><p class="ftitre">Villes</p><ul class="villes-pied"><li><a href="/">Vitrier Rosny-sous-Bois</a></li>{"".join(f'<li><a href="/{v["slug"]}/">Vitrier {e(v["nom"])}</a></li>' for v in VILLES if v["slug"] in VILLES_PIED)}</ul></div>
     <div><p class="ftitre">Départements</p><ul><li><a href="/vitrier-paris/">Vitrier Paris (75)</a></li>{"".join(f'<li><a href="/{d["slug"]}/">Vitrier {e(d["nom"])} ({d["num"]})</a></li>' for d in DEPARTEMENTS)}</ul></div>
   </div>
@@ -466,6 +467,17 @@ def page_accueil():
     </div>
   </div>
 </div></section>
+<section><div class="wrap">
+  <div class="proof">
+    <div class="txt">
+      <p class="eyebrow">Pose de chatière</p>
+      <h2>Une chatière dans votre vitre, sans changer la fenêtre</h2>
+      <p>Votre chat entre et sort seul. Nous refaisons le vitrage, simple ou double, percé au diamètre de la chatière, puis nous posons la chatière dans votre fenêtre, porte-fenêtre ou baie. En double vitrage, l'isolation est conservée.</p>
+      <p><a class="lien-fort" href="/pose-de-chatiere/">Pose de chatière : voir le chantier en photos →</a></p>
+    </div>
+    {img("avant-apres-chatiere","Avant et après la pose d'une chatière dans le double vitrage d'une porte-fenêtre par Miroiterie Winter")}
+  </div>
+</div></section>
 {bloc_videos("accueil")}<section><div class="wrap atouts">
   <div><p class="eyebrow">Pourquoi nous appeler</p><h2>Un artisan local, joignable à toute heure</h2></div>
   <ul class="liste-atouts">
@@ -510,10 +522,21 @@ def bloc_pose(slug_vitrier, an):
   <div class="bloc"><h2>Pose de fenêtres {e(an)}</h2><p>Fenêtres, portes-fenêtres et baies en PVC ou en aluminium, double vitrage, fabriquées à vos mesures et posées. Une seule fenêtre ou tout le logement.</p><p><a class="lien-fort" href="{lien("fenetres")}">Pose de fenêtres {e(an)} →</a></p></div>
   <div class="bloc"><h2>Pose de volets roulants {e(an)}</h2><p>Volets roulants manuels, électriques ou solaires, sur fenêtres neuves ou existantes, fabriqués sur mesure.</p><p><a class="lien-fort" href="{lien("volets")}">Pose de volets roulants {e(an)} →</a></p></div>
   <div class="bloc"><h2>Miroir sur mesure {e(an)}</h2><p>Miroirs ronds, ovales ou rectangulaires, murs de miroirs et crédences en verre, découpés à vos mesures et posés.</p><p><a class="lien-fort" href="{lien("miroirs")}">Miroir sur mesure {e(an)} →</a></p></div>
+  <div class="bloc"><h2>Pose de chatière {e(an)}</h2><p>Chatière posée dans la vitre d'une fenêtre, d'une porte-fenêtre ou d'une baie, en simple ou double vitrage, sans changer la fenêtre.</p><p><a class="lien-fort" href="{lien("chatieres")}">Pose de chatière {e(an)} →</a></p></div>
 </div></div></section>'''
 
 def liens_autres_services(key, vs=None, an=None):
     return "".join(f'<p><a class="lien-fort" href="/{o["slug"]}/{vs + "/" if vs else ""}">{"Voir aussi : " if not vs else ""}{e(o["court"])}{" " + e(an) if an else ""} →</a></p>' for k2, o in SERVICES_POSE.items() if k2 != key)
+
+def bloc_galerie(S, fond=False):
+    if not S.get("galerie"): return ""
+    fig = lambda f, t, d: img(f, t + " : " + d).replace('width="800" height="1000"', 'width="640" height="800"')
+    cartes = "".join(f'<figure class="real">{fig(f, t, d)}<figcaption><b>{e(t)}</b><span>{e(d)}</span></figcaption></figure>' for f,t,d in S["galerie"])
+    return f'''<section{' class="fond"' if fond else ''}><div class="wrap">
+  <div><p class="eyebrow">Chantier réel</p><h2>Une chatière posée dans un double vitrage</h2></div>
+  <div class="galerie">{cartes}</div>
+</div></section>
+'''
 
 def page_pose(key):
     S = SERVICES_POSE[key]
@@ -526,10 +549,11 @@ def page_pose(key):
     h += hero("Miroiterie Winter · Île-de-France", S["h1"], S["lead"])
     blocs = "".join(f'<div class="bloc"><h2>{e(t)}</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in l)}</ul></div>' for t,l in S["blocs"])
     image = f'<div class="bloc">{img(S["image"][0], S["image"][1])}</div>' if S["image"] else ""
+    galerie = bloc_galerie(S)
     villes = "".join(f'<a href="/{S["slug"]}/{vs}/">{e(S["court"])} {e(n)}</a>' for vs,n,_c,_a,_f,_v,_l in VILLES_POSE)
     deps = "".join(f'<a href="/{d["slug"]}/">{e(d["nom"])} ({d["num"]})</a>' for d in DEPARTEMENTS)
-    h += f'''<section><div class="wrap"><div class="blocs deux">{blocs}{image}</div></div></section>
-{bloc_videos(key)}<section class="fond"><div class="wrap"><div><p class="eyebrow">Près de chez vous</p><h2>{e(S["court"])} dans votre ville</h2></div><div class="villes">{villes}</div>
+    h += f'''<section><div class="wrap"><div class="blocs deux">{image + blocs if key == "chatieres" else blocs + image}</div></div></section>
+{galerie}{bloc_videos(key)}<section class="fond"><div class="wrap"><div><p class="eyebrow">Près de chez vous</p><h2>{e(S["court"])} dans votre ville</h2></div><div class="villes">{villes}</div>
 <p>Nous intervenons aussi dans toute l'Île-de-France :</p><div class="villes">{deps}</div>
 {liens_autres_services(key)}</div></section>
 {bloc_avis()}
@@ -541,7 +565,7 @@ def page_pose(key):
 def page_pose_ville(key, vv):
     S = SERVICES_POSE[key]
     vs, n, cp, an, tf, tv, lien_vitrier = vv
-    texte = {"fenetres": tf, "volets": tv, "miroirs": TEXTES_MIROIR[vs]}[key]
+    texte = {"fenetres": tf, "volets": tv, "miroirs": TEXTES_MIROIR[vs], "chatieres": TEXTES_CHATIERE[vs]}[key]
     chemin = f'/{S["slug"]}/{vs}/'
     ariane = [("Accueil","/"),(S["court"],f'/{S["slug"]}/'),(f'{S["court"]} {n}',chemin)]
     faq = [(f"Comment obtenir un devis pour la {S['nom']} {an} ?", f"Appelez le {TEL} ou envoyez une photo par SMS : nous vous donnons un devis immédiat, puis nous venons prendre les mesures."),
@@ -552,9 +576,9 @@ def page_pose_ville(key, vv):
     titre = f'{S["court"]} {an} ({cp}) | Miroiterie Winter'
     if len(titre) > 60: titre = f'{S["court"]} {n} | Miroiterie Winter'
     if len(titre) > 60: titre = f'{S["court"]} {n} | M. Winter'
-    quoi = {"fenetres": "fenêtres et portes-fenêtres PVC ou alu, double vitrage, sur mesure", "volets": "volets roulants manuels, électriques ou solaires, sur mesure", "miroirs": "miroirs ronds, ovales ou rectangulaires et crédences, posés"}[key]
+    quoi = {"fenetres": "fenêtres et portes-fenêtres PVC ou alu, double vitrage, sur mesure", "volets": "volets roulants manuels, électriques ou solaires, sur mesure", "miroirs": "miroirs ronds, ovales ou rectangulaires et crédences, posés", "chatieres": "chatière dans une vitre, simple ou double vitrage, sans changer la fenêtre"}[key]
     desc = f'{S["court"]} {an} ({cp}) : {quoi}. Devis immédiat au {TEL}.'
-    h = tete(titre, desc, chemin, ld)
+    h = tete(titre, desc, chemin, ld, og_image=f'/images/{S["image"][0]}.jpg' if key == "chatieres" else "/images/avant-apres-vitre-cassee.jpg")
     h += '<div class="wrap">' + fil(ariane) + '</div>'
     h += hero(f"Miroiterie Winter · {n}", f'{S["court"]} {an}', S["lead"])
     liste = "".join(f"<li>{e(x)}</li>" for x in S["blocs"][0][1])
@@ -566,7 +590,7 @@ def page_pose_ville(key, vv):
   {liens_autres_services(key, vs, an)}
   <p><a class="lien-fort" href="{lien_vitrier}">Vitrier {e(an)} : vitre cassée, miroirs, parois de douche →</a></p></div>
 </div></div></section>
-{bloc_videos(key, fond=True)}{bloc_avis()}
+{bloc_galerie(S, fond=True) if key == "chatieres" else ""}{bloc_videos(key, fond=True)}{bloc_avis()}
 {bloc_faq(faq, f'{S["court"]} {an} : vos questions')}
 <section class="fond"><div class="wrap"><div><p class="eyebrow">Autres villes</p><h2>{e(S["court"])} près de chez vous</h2></div><div class="villes"><a href="/{S["slug"]}/">{e(S["court"])} en Île-de-France</a>{autres}</div></div></section>
 '''
